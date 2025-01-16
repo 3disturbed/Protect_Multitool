@@ -10,6 +10,7 @@
   - [Tamanna](#tamanna)
   - [Fatima](#fatima)
 - [Temp](#temp)
+- [Automated WhatsApp message event](#automated-whatsapp-message-event)
 ## UI
 Some color palette details:
 - **Primary:** #4338CA
@@ -47,6 +48,12 @@ The goal is to create a seamless and intuitive user experience that ensures easy
 4. **Notifications:**
    - Real-time alerts for critical updates.
    - Push notifications for missed check-ins or safety warnings.
+
+5. **Automated WhatsApp message event:**
+   - Once triggered using a hidden feature like a game, this event will trigger an automated message to be sent via WhatsApp to the user's set emergency contacts.
+   - Emergency contacts will be set via the user's account, using PostgreSQL and Django all auth.
+   - Messaging will be sent using MessageBird API.
+   - Message will be sent via WhatsApp and be very generic as it's for testing purposes - WhatsApp requires official business proof for specific message types which we won't have at the time of creation.
 
 [Back to Contents](#contents)
 
@@ -163,5 +170,16 @@ class CheckIn(models.Model):
         time_passed = timezone.now() - self.last_check_in
         return time_passed > timedelta(minutes=40)
 ```
+
+[Back to Contents](#contents)
+
+## Automated WhatsApp message event
+Once triggered using a hidden feature like a game, this event will trigger an automated message to be sent via WhatsApp to the user's set emergency contacts.
+
+Emergency contacts will be set via the user's account, using PostgreSQL and Django all auth.
+
+Messaging will be sent using MessageBird API.
+
+Message will be sent via WhatsApp and be very generic as it's for testing purposes - WhatsApp requires official business proof for specific message types which we won't have at the time of creation.
 
 [Back to Contents](#contents)
