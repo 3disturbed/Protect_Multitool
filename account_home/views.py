@@ -32,12 +32,12 @@ from .models import EmergencyContact
 @login_required
 def emergency_contact_list(request):
     contacts = EmergencyContact.objects.filter(user=request.user)
-    return render(request, 'emergency_contacts/contact_list.html', {'contacts': contacts})
+    return render(request, 'account_home/contact_list.html', {'contacts': contacts})
 
 @login_required
 def add_emergency_contact(request):
     if EmergencyContact.objects.filter(user=request.user).count() >= 5:
-        return render(request, 'emergency_contacts/contact_limit.html')
+        return render(request, 'account_home/contact_limit.html')
 
     if request.method == 'POST':
         form = EmergencyContactForm(request.POST)
