@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi
+web: gunicorn protect_multitool.wsgi
