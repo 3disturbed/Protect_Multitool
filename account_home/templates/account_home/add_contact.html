@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Emergency Contact</title>
+</head>
+<body>
+    <h1>Add Emergency Contact</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'emergency_contact_list' %}">Back to List</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Emergency Contacts</title>
+</head>
+<body>
+    <h1>My Emergency Contacts</h1>
+    <ul>
+        {% for contact in contacts %}
+            <li>{{ contact.name }} ({{ contact.relationship }}) - {{ contact.phone }}</li>
+        {% empty %}
+            <li>No contacts added yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_emergency_contact' %}">Add Contact</a>
+</body>
+</html>
