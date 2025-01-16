@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2> Secret game </h2>
+
+
+<button id="sendRequest">Send POST Request</button>
+
+<script>
+
+    document.getElementById('sendRequest').addEventListener('click', () => {
+        console.log("Button clicked!");
+
+
+        fetch('{% url "handle_event" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ recipient: "+34680639505",
+            sender: "Michael"}),
+        })
+        .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+{% endblock %}
