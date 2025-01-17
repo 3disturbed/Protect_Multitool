@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-3disturbed-protectmulti-ombljfw9dkf.ws.codeinstitute-ide.net',
+    "https://multitool-87412d08ac41.herokuapp.com/",
 ]
 
 
@@ -70,7 +71,10 @@ ROOT_URLCONF = 'protect_multitool.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +86,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -101,9 +106,10 @@ WSGI_APPLICATION = 'protect_multitool.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default':
-        dj_database_url.parse(os.environ.get("DATABASE_URL"))
-    }
+    'default': dj_database_url.parse(
+        os.environ.get('DATABASE_URL', 'sqlite:///db.sqlite3')
+    )
+}
 
 
 # Password validation
@@ -149,7 +155,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'

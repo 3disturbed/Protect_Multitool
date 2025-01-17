@@ -1,7 +1,22 @@
+# Mission Statement
+
+Protect Multitool is dedicated to empowering individuals by providing innovative safety solutions that integrate seamlessly into daily life. Our mission is to leverage technology to create discreet, accessible, and effective tools that enhance personal security, raise awareness about human trafficking and modern slavery, and foster a safer world for all.
+
+[Visit Deployed Site on Heroku!](https://multitool-87412d08ac41.herokuapp.com/)
+
 ## Contents
 - [UXD (User Experience Design)](#user-experience-ux)
 - [Features](#features)
+- [Safety Transit](#safety-transit)
+- [Kicky Frog and Fake Games](#kicky-frog-and-fake-games)
 - [Tech Stack](#tech-stack)
+- [Installation & Setup Guide](#installation--setup-guide)
+- [Contribution Guidelines](#contribution-guidelines)
+- [API Documentation](#api-documentation)
+- [Security Considerations](#security-considerations)
+- [Testing & Debugging](#testing--debugging)
+- [Deployment Guide](#deployment-guide)
+- [License & Legal Considerations](#license--legal-considerations)
 - [Team](#team)
   - [Ben](#ben)
   - [Loch](#loch)
@@ -10,7 +25,9 @@
   - [Tamanna](#tamanna)
   - [Fatima](#fatima)
 - [Temp](#temp)
-- [Automated WhatsApp message event](#automated-whatsapp-message-event)
+
+
+
 ## UI
 Some color palette details:
 - **Primary:** #4338CA
@@ -57,6 +74,40 @@ The goal is to create a seamless and intuitive user experience that ensures easy
 
 [Back to Contents](#contents)
 
+## Safety Transit
+The Safety Transit feature functions as a **PIN-protected dead man's switch** that ensures user safety while in transit. 
+
+- **How It Works:**
+  - The user sets up a journey by inputting their origin, destination, and estimated travel time.
+  - They receive periodic prompts to enter their PIN to confirm they are safe.
+  - If the user does not enter their PIN within the allotted timeframe, an automated distress signal is sent to their designated emergency contact.
+  - The distress signal includes the user's last known location, journey details, and any additional safety information.
+
+- **Key Features:**
+  - **Customizable Timeframes:** Users can set the check-in frequency based on travel duration.
+  - **Silent Alarm Option:** If the user is in danger and cannot safely enter their PIN, they can enter an alternative code to send an alert silently.
+  - **GPS Integration:** Automatically tracks the user's journey and updates emergency contacts on progress.
+  - **Failsafe Mechanism:** If internet or GPS connectivity is lost, the system attempts to send a final update with the last known location.
+
+[Back to Contents](#contents)
+
+## Kicky Frog and Fake Games
+To provide a **stealth distress signal**, the platform includes fake games like **Kicky Frog**, designed to help users discreetly trigger silent alarms.
+
+- **How It Works:**
+  - The user opens the fake game, which looks like an ordinary mobile game (e.g., a simple Flappy Bird-style game).
+  - If the user fails on the first obstacle (deliberately or due to distress), the system triggers a silent alarm.
+  - The silent alarm sends a distress message to the user's emergency contact, along with location data if available.
+
+- **Key Features:**
+  - **Disguised Interface:** Looks like a real game to avoid raising suspicion.
+  - **Customizable Triggers:** Users can define multiple failure conditions to trigger the alarm.
+  - **Fake Chat Option:** A built-in chat window that appears real but can be used to send pre-set distress messages.
+  - **Stealth Activation:** Ensures a way to seek help without alerting potential threats.
+  - **GPS-Enabled Alerts:** If enabled, the distress signal includes the user's location.
+
+[Back to Contents](#contents)
+
 ## Tech Stack
 - **Frontend:**
   - HTML, CSS, JavaScript.
@@ -75,6 +126,77 @@ The goal is to create a seamless and intuitive user experience that ensures easy
 
 - **Hosting and Deployment:**
   - AWS or Heroku – for hosting the application.
+
+[Back to Contents](#contents)
+
+
+## Installation & Setup Guide
+To set up the project locally, follow these steps:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/protect-multitool.git
+   ```
+2. Navigate into the project directory:
+   ```sh
+   cd protect-multitool
+   ```
+3. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. Set up environment variables in a `.env` file.
+5. Run migrations:
+   ```sh
+   python manage.py migrate
+   ```
+6. Start the development server:
+   ```sh
+   python manage.py runserver
+   ```
+
+[Back to Contents](#contents)
+
+## Contribution Guidelines
+- Follow the branching model: feature branches should be prefixed with `feature/`, and bug fixes with `fix/`.
+- Submit pull requests with detailed descriptions and relevant issue links.
+- Follow PEP 8 style guidelines for Python and adhere to best practices for frontend code.
+
+[Back to Contents](#contents)
+
+## API Documentation
+- **Authentication API**: Login, registration, and user management.
+- **Safety Transit API**: Creating and managing user journeys.
+- **Notification API**: Sending alerts via SMS, email, and WhatsApp.
+- API documentation is auto-generated with Swagger.
+
+[Back to Contents](#contents)
+
+## Security Considerations
+- Encrypted communications using HTTPS.
+- Secure API endpoints with JWT authentication.
+- Rate limiting to prevent abuse.
+
+[Back to Contents](#contents)
+
+## Testing & Debugging
+- Run tests with:
+   ```sh
+   pytest
+   ```
+- Use logging and Django Debug Toolbar for debugging.
+
+[Back to Contents](#contents)
+
+## Deployment Guide
+- The project is deployed using Heroku.
+- CI/CD pipeline setup with GitHub Actions.
+- Database hosted on AWS RDS.
+
+[Back to Contents](#contents)
+
+## License & Legal Considerations
+- This project is licensed under the MIT License.
+- If using third-party APIs, ensure compliance with their terms of service.
 
 [Back to Contents](#contents)
 
