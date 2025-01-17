@@ -42,7 +42,7 @@
 </head>
 <body class="min-h-screen flex flex-col bg-neutral text-white">
     <!-- Emergency Banner -->
-    <div class="fixed bg-gradient-to-r from-accent to-secondary text-white relative overflow-hidden">
+    <div class="fixed top-0 left-0 w-full bg-gradient-to-r from-accent to-secondary text-white z-50">
         <div class="absolute top-0 left-0 w-full h-full bg-black/10"></div>
         <div class="max-w-7xl mx-auto px-4 py-3 relative">
             <div class="flex items-center justify-center space-x-3">
@@ -59,7 +59,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-12">
+    <nav class="fixed w-full z-40 top-8">
         <div class="mx-auto px-4 py-3">
             <div class="backdrop-blur-md bg-neutral/70 rounded-2xl shadow-lg px-6 py-4">
                 <div class="flex justify-between items-center">
@@ -87,7 +87,6 @@
                         {% block navigation %}
                         <a href="{% url 'home_page:home' %}" class="text-sm font-medium hover:text-accent transition-colors">Home</a>
                         <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes
-                            <span>Game</span>
                             <span class="ml-1 px-1.5 py-0.5 text-xs bg-accent/20 rounded-md">New</span>
                         </a>
                         <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
@@ -158,7 +157,7 @@
     {% endif %}
 
     <!-- Main Content Area -->
-    <main class="flex-grow container mx-auto px-4 pt-10 pb-12">
+    <main class="flex-grow container mx-auto px-4 pt-20 mt-10 pb-12">
         {% block content %}
         <!-- Page content goes here -->
         {% endblock %}
