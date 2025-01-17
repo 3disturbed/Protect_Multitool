@@ -21,7 +21,7 @@
         console.log(`Name: ${contact_name}, Number: ${phone_number}`);
         console.log("Button clicked!");
         // API request to send on loop for each contact
-        fetch(`{% url "handle_event" %}`, {
+        fetch(`{% url 'game:handle_event' %}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
