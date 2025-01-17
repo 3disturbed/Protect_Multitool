@@ -5,15 +5,25 @@
 
 
 <button id="sendRequest">Send POST Request</button>
-
+{% for contact in emergency_contacts_list %}
+{% endfor %}
 <script>
 
-    document.getElementById('sendRequest').addEventListener('click', () => {
+    let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|safe }}');
+
+    let contact_name = '';
+    let phone_number = '';
+    const first_name = "{{first_name}}"
+
+        document.getElementById('sendRequest').addEventListener('click', () => {
+            //For loop within event listener to count the contacts and make individual request for each
+            for (let i = 0; i < emergency_contacts_list.length; i++) {
+        contact_name = emergency_contacts_list[i].name; 
+        phone_number = emergency_contacts_list[i].phone_number; 
+        console.log(`Name: ${contact_name}, Number: ${phone_number}`);
         console.log("Button clicked!");
-        const contact_name = "{{contact_name}}"
-        const first_name = "{{first_name}}"
-        const phone_number = "{{phone_number}}"
-        fetch('{% url "handle_event" %}', {
+        // API request to send on loop for each contact
+        fetch(`{% url "handle_event" %}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,6 +44,15 @@
             .catch(error => {
                 console.error('Error:', error);
             });
+        }
     });
 </script>
+
+
+
+
+
+
+
+
 {% endblock %}

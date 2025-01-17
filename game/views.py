@@ -12,24 +12,22 @@ import os
 def simple_game_view(request):
     user = request.user
     first_name = user.first_name
-    print(user)
     emergency_contacts = EmergencyContact.objects.filter(user=user)
-
+    emergency_contacts_list = []
+    print(user)
     if emergency_contacts.exists():
-        emergency_contact = emergency_contacts.first()
-        phone_number = emergency_contact.phone
-        contact_name = emergency_contact.name
-        print(phone_number, first_name)
+        for contact in emergency_contacts:
+            emergency_contacts_list.append({
+                'name': contact.name,
+                'phone_number': contact.phone,
+            })
+            print (emergency_contacts_list)
     else:
-        phone_number = None
-        user_name = None
-        print('Nothing to print')
-
-
+        print('No emergency contacts to display')
+    emergency_contacts_json = json.dumps(emergency_contacts_list)
+    print(emergency_contacts_json)
     context = {
-        'emergency_contacts': emergency_contacts,  
-        'phone_number': phone_number,
-        'contact_name': contact_name,
+        'emergency_contacts_list': emergency_contacts_json,
         'first_name': first_name,
     }
 
