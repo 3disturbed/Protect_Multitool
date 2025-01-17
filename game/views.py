@@ -8,6 +8,7 @@ import json
 import os
 
 # Create your views here.
+
 @login_required
 def simple_game_view(request):
     user = request.user
