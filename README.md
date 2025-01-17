@@ -3,6 +3,8 @@
 ## Contents
 - [UXD (User Experience Design)](#user-experience-ux)
 - [Features](#features)
+- [Safety Transit](#safety-transit)
+- [Kicky Frog and Fake Games](#kicky-frog-and-fake-games)
 - [Tech Stack](#tech-stack)
 - [Team](#team)
   - [Ben](#ben)
@@ -13,6 +15,8 @@
   - [Fatima](#fatima)
 - [Temp](#temp)
 - [Automated WhatsApp message event](#automated-whatsapp-message-event)
+
+  
 ## UI
 Some color palette details:
 - **Primary:** #4338CA
@@ -56,6 +60,40 @@ The goal is to create a seamless and intuitive user experience that ensures easy
    - Emergency contacts will be set via the user's account, using PostgreSQL and Django all auth.
    - Messaging will be sent using MessageBird API.
    - Message will be sent via WhatsApp and be very generic as it's for testing purposes - WhatsApp requires official business proof for specific message types which we won't have at the time of creation.
+
+[Back to Contents](#contents)
+
+## Safety Transit
+The Safety Transit feature functions as a **PIN-protected dead man's switch** that ensures user safety while in transit. 
+
+- **How It Works:**
+  - The user sets up a journey by inputting their origin, destination, and estimated travel time.
+  - They receive periodic prompts to enter their PIN to confirm they are safe.
+  - If the user does not enter their PIN within the allotted timeframe, an automated distress signal is sent to their designated emergency contact.
+  - The distress signal includes the user's last known location, journey details, and any additional safety information.
+
+- **Key Features:**
+  - **Customizable Timeframes:** Users can set the check-in frequency based on travel duration.
+  - **Silent Alarm Option:** If the user is in danger and cannot safely enter their PIN, they can enter an alternative code to send an alert silently.
+  - **GPS Integration:** Automatically tracks the user's journey and updates emergency contacts on progress.
+  - **Failsafe Mechanism:** If internet or GPS connectivity is lost, the system attempts to send a final update with the last known location.
+
+[Back to Contents](#contents)
+
+## Kicky Frog and Fake Games
+To provide a **stealth distress signal**, the platform includes fake games like **Kicky Frog**, designed to help users discreetly trigger silent alarms.
+
+- **How It Works:**
+  - The user opens the fake game, which looks like an ordinary mobile game (e.g., a simple Flappy Bird-style game).
+  - If the user fails on the first obstacle (deliberately or due to distress), the system triggers a silent alarm.
+  - The silent alarm sends a distress message to the user's emergency contact, along with location data if available.
+
+- **Key Features:**
+  - **Disguised Interface:** Looks like a real game to avoid raising suspicion.
+  - **Customizable Triggers:** Users can define multiple failure conditions to trigger the alarm.
+  - **Fake Chat Option:** A built-in chat window that appears real but can be used to send pre-set distress messages.
+  - **Stealth Activation:** Ensures a way to seek help without alerting potential threats.
+  - **GPS-Enabled Alerts:** If enabled, the distress signal includes the user's location.
 
 [Back to Contents](#contents)
 
