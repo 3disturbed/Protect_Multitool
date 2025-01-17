@@ -1,11 +1,17 @@
 [Visit Deployed Site on Heroku!](https://multitool-87412d08ac41.herokuapp.com/)
-
 ## Contents
 - [UXD (User Experience Design)](#user-experience-ux)
 - [Features](#features)
 - [Safety Transit](#safety-transit)
 - [Kicky Frog and Fake Games](#kicky-frog-and-fake-games)
 - [Tech Stack](#tech-stack)
+- [Installation & Setup Guide](#installation--setup-guide)
+- [Contribution Guidelines](#contribution-guidelines)
+- [API Documentation](#api-documentation)
+- [Security Considerations](#security-considerations)
+- [Testing & Debugging](#testing--debugging)
+- [Deployment Guide](#deployment-guide)
+- [License & Legal Considerations](#license--legal-considerations)
 - [Team](#team)
   - [Ben](#ben)
   - [Loch](#loch)
@@ -14,9 +20,9 @@
   - [Tamanna](#tamanna)
   - [Fatima](#fatima)
 - [Temp](#temp)
-- [Automated WhatsApp message event](#automated-whatsapp-message-event)
 
-  
+
+
 ## UI
 Some color palette details:
 - **Primary:** #4338CA
@@ -115,6 +121,77 @@ To provide a **stealth distress signal**, the platform includes fake games like 
 
 - **Hosting and Deployment:**
   - AWS or Heroku – for hosting the application.
+
+[Back to Contents](#contents)
+
+
+## Installation & Setup Guide
+To set up the project locally, follow these steps:
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-repo/protect-multitool.git
+   ```
+2. Navigate into the project directory:
+   ```sh
+   cd protect-multitool
+   ```
+3. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. Set up environment variables in a `.env` file.
+5. Run migrations:
+   ```sh
+   python manage.py migrate
+   ```
+6. Start the development server:
+   ```sh
+   python manage.py runserver
+   ```
+
+[Back to Contents](#contents)
+
+## Contribution Guidelines
+- Follow the branching model: feature branches should be prefixed with `feature/`, and bug fixes with `fix/`.
+- Submit pull requests with detailed descriptions and relevant issue links.
+- Follow PEP 8 style guidelines for Python and adhere to best practices for frontend code.
+
+[Back to Contents](#contents)
+
+## API Documentation
+- **Authentication API**: Login, registration, and user management.
+- **Safety Transit API**: Creating and managing user journeys.
+- **Notification API**: Sending alerts via SMS, email, and WhatsApp.
+- API documentation is auto-generated with Swagger.
+
+[Back to Contents](#contents)
+
+## Security Considerations
+- Encrypted communications using HTTPS.
+- Secure API endpoints with JWT authentication.
+- Rate limiting to prevent abuse.
+
+[Back to Contents](#contents)
+
+## Testing & Debugging
+- Run tests with:
+   ```sh
+   pytest
+   ```
+- Use logging and Django Debug Toolbar for debugging.
+
+[Back to Contents](#contents)
+
+## Deployment Guide
+- The project is deployed using Heroku.
+- CI/CD pipeline setup with GitHub Actions.
+- Database hosted on AWS RDS.
+
+[Back to Contents](#contents)
+
+## License & Legal Considerations
+- This project is licensed under the MIT License.
+- If using third-party APIs, ensure compliance with their terms of service.
 
 [Back to Contents](#contents)
 
