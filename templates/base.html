@@ -42,7 +42,7 @@
 </head>
 <body class="min-h-screen flex flex-col bg-neutral text-white">
     <!-- Emergency Banner -->
-    <div class="bg-gradient-to-r from-accent to-secondary text-white relative overflow-hidden">
+    <div class="fixed bg-gradient-to-r from-accent to-secondary text-white relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full bg-black/10"></div>
         <div class="max-w-7xl mx-auto px-4 py-3 relative">
             <div class="flex items-center justify-center space-x-3">
@@ -144,7 +144,7 @@
                 </div>
             </div>
         </div>
-
+    </nav>
 
     <!-- Messages/Alerts -->
     {% if messages %}
