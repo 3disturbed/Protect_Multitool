@@ -19,7 +19,7 @@ def add_emergency_contact(request):
             contact = form.save(commit=False)
             contact.user = request.user
             contact.save()
-            return redirect('emergency_contact_list')
+            return redirect('account_home:emergency_contact_list')
     else:
         form = EmergencyContactForm()
     return render(request, 'account_home/add_contact.html', {'form': form})
@@ -31,7 +31,7 @@ def edit_emergency_contact(request, pk):
         form = EmergencyContactForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
-            return redirect('emergency_contact_list')
+            return redirect('account_home:emergency_contact_list')
     else:
         form = EmergencyContactForm(instance=contact)
     return render(request, 'account_home/edit_contact.html', {'form': form, 'contact': contact})
@@ -41,5 +41,5 @@ def delete_emergency_contact(request, pk):
     contact = get_object_or_404(EmergencyContact, pk=pk, user=request.user)
     if request.method == 'POST':
         contact.delete()
-        return redirect('emergency_contact_list')
+        return redirect('account_home:emergency_contact_list')
     return render(request, 'account_home/delete_contact.html', {'contact': contact})

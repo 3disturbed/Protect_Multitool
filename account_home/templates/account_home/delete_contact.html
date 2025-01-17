@@ -10,6 +10,6 @@
         {% csrf_token %}
         <button type="submit">Yes, delete</button>
     </form>
-    <a href="{% url 'emergency_contact_list' %}">Cancel</a>
+    <a href="{% url 'account_home:emergency_contact_list' %}">Cancel</a>
 </body>
 </html>
