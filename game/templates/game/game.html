@@ -10,7 +10,8 @@
 
     document.getElementById('sendRequest').addEventListener('click', () => {
         console.log("Button clicked!");
-        const user_name = "{{user_name}}"
+        const contact_name = "{{contact_name}}"
+        const first_name = "{{first_name}}"
         const phone_number = "{{phone_number}}"
         fetch('{% url "handle_event" %}', {
             method: 'POST',
@@ -18,7 +19,8 @@
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ recipient: phone_number,
-            sender: user_name}),
+            sender: first_name,
+            contact: contact_name}),
         })
         .then(response => {
                 if (!response.ok) {
