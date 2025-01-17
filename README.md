@@ -1,4 +1,9 @@
+# Mission Statement
+
+Protect Multitool is dedicated to empowering individuals by providing innovative safety solutions that integrate seamlessly into daily life. Our mission is to leverage technology to create discreet, accessible, and effective tools that enhance personal security, raise awareness about human trafficking and modern slavery, and foster a safer world for all.
+
 [Visit Deployed Site on Heroku!](https://multitool-87412d08ac41.herokuapp.com/)
+
 ## Contents
 - [UXD (User Experience Design)](#user-experience-ux)
 - [Features](#features)
