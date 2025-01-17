@@ -5,8 +5,6 @@
 
 
 <button id="sendRequest">Send POST Request</button>
-{% for contact in emergency_contacts_list %}
-{% endfor %}
 <script>
 
     let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|safe }}');
