@@ -11,14 +11,15 @@ import os
 @login_required
 def simple_game_view(request):
     user = request.user
+    first_name = user.first_name
     print(user)
     emergency_contacts = EmergencyContact.objects.filter(user=user)
 
     if emergency_contacts.exists():
         emergency_contact = emergency_contacts.first()
         phone_number = emergency_contact.phone
-        user_name = emergency_contact.name
-        print(phone_number, user_name)
+        contact_name = emergency_contact.name
+        print(phone_number, first_name)
     else:
         phone_number = None
         user_name = None
@@ -28,7 +29,8 @@ def simple_game_view(request):
     context = {
         'emergency_contacts': emergency_contacts,  
         'phone_number': phone_number,
-        'user_name': user_name,
+        'contact_name': contact_name,
+        'first_name': first_name,
     }
 
 
@@ -46,6 +48,7 @@ def handle_event(request):
             data = json.loads(request.body)
             recipient = data.get("recipient")
             sender = data.get("sender")
+            contact = data.get("contact")
 
 
             if not recipient or not sender:
@@ -62,16 +65,18 @@ def handle_event(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos",
+                        "templateName": "test_sos_2",
                         "language": {
                             "policy": "deterministic",
-                            "code": "en_GB"
+                            "code": "en"
                         },
                         "params": [
                              {
-                                "default": sender
+                                "default": contact
                                                     },
-                                    
+                            {
+                                "default": sender
+                            }
                           ]
                     }
                 }
