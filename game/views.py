@@ -10,20 +10,27 @@ import os
 # Create your views here.
 @login_required
 def simple_game_view(request):
-    emergency_contact = EmergencyContact.objects.filter(user=request.user).first()
+    user = request.user
+    print(user)
+    emergency_contacts = EmergencyContact.objects.filter(user=user)
 
-    if emergency_contact:
+    if emergency_contacts.exists():
+        emergency_contact = emergency_contacts.first()
         phone_number = emergency_contact.phone
         user_name = emergency_contact.name
+        print(phone_number, user_name)
     else:
         phone_number = None
         user_name = None
+        print('Nothing to print')
 
-    # Pass specific details to the template
+
     context = {
+        'emergency_contacts': emergency_contacts,  
         'phone_number': phone_number,
         'user_name': user_name,
     }
+
 
     return render(request, 'game/game.html', context)
 
