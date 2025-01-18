@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Edit Emergency Contact</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <h1>Edit Emergency Contact</h1>
     <form method="post">
         {% csrf_token %}
@@ -11,5 +7,4 @@
         <button type="submit">Save Changes</button>
     </form>
     <a href="{% url 'account_home:emergency_contact_list' %}">Cancel</a>
-</body>
-</html>
+{% endblock %}

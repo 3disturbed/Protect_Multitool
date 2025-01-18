@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Emergency Contacts</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <h1>My Emergency Contacts</h1>
     <ul>
         {% for contact in contacts %}
@@ -15,5 +11,4 @@
         {% endfor %}
     </ul>
     <a href="{% url 'account_home:add_emergency_contact' %}">Add Emergency Contact</a>
-</body>
-</html>
+{% endblock %}
