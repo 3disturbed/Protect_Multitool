@@ -1,18 +1,39 @@
 {% extends "base.html" %}
 {% load static %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
-{% endblock %}
 
 {% block head_title %}Delete Emergency Contact{% endblock head_title %}
 
 {% block content %}
-<h1>Delete Emergency Contact</h1>
-<p>Are you sure you want to delete {{ contact.name }}?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, delete</button>
-</form>
-<a href="{% url 'account_home:emergency_contact_list' %}">Cancel</a>
-{% endblock content %}
-
+<div class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto">
+        <!-- Delete Confirmation -->
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10 text-center">
+            <svg class="mx-auto h-12 w-12 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            
+            <h2 class="text-xl font-bold text-white mb-2">Delete Emergency Contact</h2>
+            <p class="text-gray-400 mb-6">
+                Are you sure you want to delete <span class="text-white font-medium">{{ contact.name }}</span> from your emergency contacts?
+                This action cannot be undone.
+            </p>
+            
+            <form method="post" class="flex justify-center space-x-4">
+                {% csrf_token %}
+                <a href="{% url 'account_home:emergency_contact_list' %}" 
+                   class="px-6 py-2 rounded-xl border border-accent/10 hover:bg-accent/10 
+                   text-white font-medium transition-colors">
+                    Cancel
+                </a>
+                <button type="submit" 
+                    class="px-6 py-2 rounded-xl bg-red-500 hover:bg-red-600 
+                    text-white font-medium shadow-lg transition-colors
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    Delete Contact
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
