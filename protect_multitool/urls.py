@@ -25,4 +25,5 @@ urlpatterns = [
     path('game/', include('game.urls')),
     path('account_home/', include('account_home.urls')),
     path('panic/', include('panic.urls')),
+    path('cases/', include('cases.urls')),
 ]

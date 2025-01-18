@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'home_page',
     'route_planner',
     'panic',
+    'cases'
 ]
 
 MIDDLEWARE = [
