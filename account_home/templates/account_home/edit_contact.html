@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Edit Emergency Contact</title>
-</head>
-<body>
-    <h1>Edit Emergency Contact</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
-    <a href="{% url 'emergency_contact_list' %}">Cancel</a>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block head_title %}Edit Emergency Contact{% endblock head_title %}
+
+{% block content %}
+<h1>Edit Emergency Contact</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+</form>
+<a href="{% url 'account_home:emergency_contact_list' %}">Cancel</a>
+{% endblock content %}
+
