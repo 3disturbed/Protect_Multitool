@@ -17,6 +17,14 @@ class Profile(models.Model):
         related_name='emergency_contact_profiles'
     )
 
+    def save(self, *args, **kwargs):
+        # Sync the first_name to the User model without causing recursion
+        if self.first_name and self.user.first_name != self.first_name:
+            self.user.first_name = self.first_name
+            self.user.save(update_fields=['first_name'])  # Avoid triggering signals unnecessarily
+        super(Profile, self).save(*args, **kwargs)
+
+
     def __str__(self):
         return f"{self.first_name or self.user.username} {self.last_name or ''}'s Profile"
 
