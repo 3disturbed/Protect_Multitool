@@ -3,46 +3,137 @@
 {% block content %}
 
 <h2 class="timer"></h2>
-<form action="/action_page.php">
+<form id="pin-form">
     <label for="pin">Pin</label>
     <input type="text" id="pin" name="pin"><br><br>
     <input type="submit" value="Submit">
-  </form>
+</form>
 <script>
-    document.addEventListener('DOMContentLoaded', function(){
-        let time = parseInt('{{ timer|safe }}', 10);  
-        console.log(`Starting countdown from: ${time} minutes`);
+    const routeId = `{{ id }}`
+    let contact_name = '';
+    let phone_number = '';
+    const first_name = "{{first_name}}"
+    document.addEventListener('DOMContentLoaded', function () {
+        const pinForm = document.querySelector('#pin-form')
+        console.log(`Route ID: ${routeId}`);
+        let timerInterval;
+        pinForm.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-        function startCountdown(minutes) {
-            let totalSeconds = minutes * 60;
+            const pinInput = document.getElementById('pin').value
+
+            fetch(`{% url 'route_planner:verify_pin' %}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id: routeId,
+                    pin: pinInput
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.valid) {
+                        stopCountdown()
+                        console.log('Correct pin, will stop countdown')
+                    } else {
+                        console.log('Incorrect Pin');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        })
+        console.log(routeId)
+    })
+    const initialTime = parseInt('{{ timer|safe }}', 10); // Parse as integer
+    console.log(`Initial time: ${initialTime} minutes`);
+
+    const storedRouteId = localStorage.getItem('currentRouteId');
+    let remainingSeconds = localStorage.getItem('remainingSeconds');
+    // Retrieve the remaining time from localStorage
+    if (storedRouteId !== routeId) {
+        console.log("New route detected. Resetting timer.");
+        // New route: reset timer and update Local Storage
+        remainingSeconds = initialTime * 60; // Convert minutes to seconds
+        localStorage.setItem('remainingSeconds', remainingSeconds);
+        localStorage.setItem('currentRouteId', routeId); // Update route ID in Local Storage
+    }
+
+    function startCountdown() {
+        timerInterval = setInterval(() => {
+            // Retrieve the remaining time from localStorage
+            let seconds = parseInt(localStorage.getItem('remainingSeconds'), 10);
+
+            // Calculate minutes and seconds
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+
+            // Format time as MM:SS
+            const formattedTime = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+            // Update the timer div
+            let timerDiv = document.querySelector('.timer');
+            if (timerDiv) {
+                timerDiv.textContent = formattedTime;  // Display time
+            }
+
+            // Stop the timer when it reaches 0
+            if (seconds <= 0) {
+                clearInterval(timerInterval);
+                console.log("Time's up!");
+                localStorage.removeItem('remainingSeconds'); // Clear storage
+                let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|safe }}');
 
 
-            const timerInterval = setInterval(() => {
-                // Calculate minutes and seconds
-                const mins = Math.floor(totalSeconds / 60);
-                const secs = totalSeconds % 60;
 
-                const formattedTime = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                    //For loop within event listener to count the contacts and make individual request for each
+                    for (let i = 0; i < emergency_contacts_list.length; i++) {
+                        contact_name = emergency_contacts_list[i].name;
+                        phone_number = emergency_contacts_list[i].phone_number;
+                        console.log(`Name: ${contact_name}, Number: ${phone_number}`);
+                        console.log("Button clicked!");
+                        // API request to send on loop for each contact
+                        fetch(`{% url 'route_planner:emergency_message' %}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                recipient: phone_number,
+                                sender: first_name,
+                                contact: contact_name,
+                                id: routeId,
+                            }),
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                console.log('Response:', data);
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                    };
+            } else {
+                // Decrement and update the remaining time in localStorage
+                seconds--;
+                localStorage.setItem('remainingSeconds', seconds);
+            }
+        }, 1000); // Run every 1 second
+    }
 
-                // Update the timer div
-                let timerDiv = document.querySelector('.timer');
-                if (timerDiv) {
-                    timerDiv.textContent = formattedTime;  //Display ctime
-                }
-
-                // Stop the timer when it reaches 0
-                if (totalSeconds === 0) {
-                    clearInterval(timerInterval);
-                    console.log("Time's up!");
-                }
-
-                totalSeconds--;
-            }, 1000);
+    //Function to stop the countdown when a correct pin is entered
+    function stopCountdown() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            console.log("Countdown stopped!");
         }
-
-        // Start the countdown using the time variable
-        startCountdown(time);
-    });
+    }
+    // Start the countdown
+    startCountdown();
 </script>
+
 
 {% endblock %}
