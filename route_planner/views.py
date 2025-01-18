@@ -90,7 +90,6 @@ def verify_pin(request):
 
 @csrf_exempt
 def emergency_message(request):
-    print("CSRF exempt view is being called.")
     user = request.user
     accessKey = os.environ['ACCESS_KEY']
     namespaceId = os.environ['NAMESPACE_ID']
@@ -126,7 +125,7 @@ def emergency_message(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos_code_3",
+                        "templateName": "test_sos_code_4",
                         "language": {
                             "policy": "deterministic",
                             "code": "en"
