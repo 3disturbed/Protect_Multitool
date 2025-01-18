@@ -35,7 +35,8 @@ CSRF_TRUSTED_ORIGINS = [
     "https://multitool-87412d08ac41.herokuapp.com/",
 ]
 
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static'] 
 
 # Application definition
 

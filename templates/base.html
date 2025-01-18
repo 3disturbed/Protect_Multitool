@@ -67,16 +67,7 @@
                     <!-- Logo -->
                     <div class="flex items-center space-x-4">
                         <a href="{% url 'home_page:home' %}" class="flex items-center space-x-2">
-                            <!-- <svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 4L4 8L12 12L20 8L12 4Z" stroke="url(#grad1)" stroke-width="2"/>
-                                <path d="M4 8V16L12 20L20 16V8" stroke="url(#grad1)" stroke-width="2"/>
-                                <defs>
-                                    <linearGradient id="grad1" x1="4" y1="4" x2="20" y2="20">
-                                        <stop offset="0%" stop-color="#FF4B91"/>
-                                        <stop offset="100%" stop-color="#6C22A6"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg> -->
+                            <img src="{% static 'home_page/logo.png' %}" alt="Logo" class="h-8 w-8 ">
                             <span class="text-2xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
                                 Protect Multi-Tool
                             </span>
@@ -213,7 +204,7 @@
                     Cancel
                 </button>
                 <button id="confirmBtn" 
-                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                    class="px-5 py-3 bg-red-500 text-2xl text-white rounded-lg hover:bg-red-600">
                     Confirm
                 </button>
             </div>
