@@ -1,18 +1,88 @@
 {% extends "base.html" %}
 {% load static %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
-{% endblock %}
 
 {% block head_title %}Edit Emergency Contact{% endblock head_title %}
 
 {% block content %}
-<h1>Edit Emergency Contact</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Changes</button>
-</form>
-<a href="{% url 'account_home:emergency_contact_list' %}">Cancel</a>
-{% endblock content %}
+<div class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                Edit Emergency Contact
+            </h1>
+            <p class="mt-2 text-sm text-gray-400">
+                Update contact information for {{ contact.name }}
+            </p>
+        </div>
 
+        <!-- Form -->
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+            <form method="post" class="space-y-4">
+                {% csrf_token %}
+                
+                <!-- Name Field -->
+                <div>
+                    <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-1">
+                        Name
+                    </label>
+                    <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border border-accent/10 focus:border-accent
+                                  focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           value="{{ form.name.value|default:'' }}"
+                           required>
+                </div>
+
+                <!-- Phone Field -->
+                <div>
+                    <label for="{{ form.phone.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-1">
+                        Phone Number
+                    </label>
+                    <input type="tel" name="{{ form.phone.name }}" id="{{ form.phone.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border border-accent/10 focus:border-accent
+                                  focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           value="{{ form.phone.value|default:'' }}"
+                           required>
+                </div>
+
+                <!-- Relationship Field -->
+                <div>
+                    <label for="{{ form.relationship.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-1">
+                        Relationship
+                    </label>
+                    <select name="{{ form.relationship.name }}" id="{{ form.relationship.id_for_label }}"
+                            class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                   bg-neutral-dark border border-accent/10 focus:border-accent
+                                   focus:outline-none focus:ring-1 focus:ring-accent
+                                   text-white"
+                            required>
+                        <option value="">Select relationship</option>
+                        <option value="Family" {% if form.relationship.value == 'Family' %}selected{% endif %}>Family</option>
+                        <option value="Friend" {% if form.relationship.value == 'Friend' %}selected{% endif %}>Friend</option>
+                        <option value="Partner" {% if form.relationship.value == 'Partner' %}selected{% endif %}>Partner</option>
+                        <option value="Other" {% if form.relationship.value == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center justify-end space-x-4 pt-4">
+                    <a href="{% url 'account_home:emergency_contact_list' %}" 
+                       class="px-4 py-2 rounded-xl border border-accent/10 hover:bg-accent/10 
+                       text-white font-medium transition-colors">
+                        Cancel
+                    </a>
+                    <button type="submit" 
+                            class="px-6 py-2 rounded-xl bg-gradient-to-r from-accent to-secondary 
+                                   hover:from-accent-light hover:to-secondary-light text-white 
+                                   font-medium shadow-lg transform transition-all hover:scale-105">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

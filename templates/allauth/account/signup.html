@@ -2,25 +2,173 @@
 {% load static %}
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
-{% endblock %}
+{% block head_title %}{% trans "Sign Up" %}{% endblock head_title %}
+
 {% block content %}
-<div class="container">
-  <div class="allauth">
-<h1>{% trans "Sign Up" %}</h1>
+<div class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto">
+        <!-- Logo and Title -->
+        <div class="text-center mb-6">
+            <svg class="mx-auto h-12 w-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4L4 8L12 12L20 8L12 4Z" stroke="url(#grad1)" stroke-width="2"/>
+                <path d="M4 8V16L12 20L20 16V8" stroke="url(#grad1)" stroke-width="2"/>
+                <defs>
+                    <linearGradient id="grad1" x1="4" y1="4" x2="20" y2="20">
+                        <stop offset="0%" stop-color="#FF4B91"/>
+                        <stop offset="100%" stop-color="#6C22A6"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <h2 class="mt-6 text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                {% trans "Create Account" %}
+            </h2>
+        </div>
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+        <!-- Main Content -->
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+            <form class="space-y-4" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
 
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-</form>
+                {% if form.non_field_errors %}
+                <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <!-- Email -->
+                <div>
+                    <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-300">
+                        {% trans "Email Address" %}
+                    </label>
+                    <input type="email" name="{{ form.email.html_name }}"
+                           id="{{ form.email.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border {% if form.email.errors %}border-red-500{% else %}border-accent/10{% endif %} 
+                                  focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           placeholder="Enter your email"
+                           {% if form.email.value %}value="{{ form.email.value }}"{% endif %}
+                           required>
+                    {% if form.email.errors %}
+                    <div class="mt-1 text-sm text-red-400">
+                        {{ form.email.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Confirm Email -->
+                <div>
+                    <label for="{{ form.email2.id_for_label }}" class="block text-sm font-medium text-gray-300">
+                        {% trans "Confirm Email" %}
+                    </label>
+                    <input type="email" name="{{ form.email2.html_name }}"
+                           id="{{ form.email2.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border {% if form.email2.errors %}border-red-500{% else %}border-accent/10{% endif %} 
+                                  focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           placeholder="Confirm your email"
+                           required>
+                    {% if form.email2.errors %}
+                    <div class="mt-1 text-sm text-red-400">
+                        {{ form.email2.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Username -->
+                <div>
+                    <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-300">
+                        {% trans "Username" %}
+                    </label>
+                    <input type="text" name="{{ form.username.html_name }}"
+                           id="{{ form.username.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border {% if form.username.errors %}border-red-500{% else %}border-accent/10{% endif %} 
+                                  focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           placeholder="Choose a username"
+                           {% if form.username.value %}value="{{ form.username.value }}"{% endif %}
+                           required>
+                    {% if form.username.errors %}
+                    <div class="mt-1 text-sm text-red-400">
+                        {{ form.username.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="{{ form.password1.id_for_label }}" class="block text-sm font-medium text-gray-300">
+                        {% trans "Password" %}
+                    </label>
+                    <input type="password" name="{{ form.password1.html_name }}"
+                           id="{{ form.password1.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border {% if form.password1.errors %}border-red-500{% else %}border-accent/10{% endif %} 
+                                  focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           placeholder="Create a password"
+                           required>
+                    <!-- Password Requirements -->
+                    <ul class="mt-2 text-sm text-gray-400 list-disc list-inside space-y-1">
+                        <li>At least 8 characters long</li>
+                        <li>Cannot be too similar to your other personal information</li>
+                        <li>Cannot be a commonly used password</li>
+                        <li>Cannot be entirely numeric</li>
+                    </ul>
+                    {% if form.password1.errors %}
+                    <div class="mt-1 text-sm text-red-400">
+                        {{ form.password1.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <label for="{{ form.password2.id_for_label }}" class="block text-sm font-medium text-gray-300">
+                        {% trans "Confirm Password" %}
+                    </label>
+                    <input type="password" name="{{ form.password2.html_name }}"
+                           id="{{ form.password2.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border {% if form.password2.errors %}border-red-500{% else %}border-accent/10{% endif %} 
+                                  focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           placeholder="Confirm your password"
+                           required>
+                    {% if form.password2.errors %}
+                    <div class="mt-1 text-sm text-red-400">
+                        {{ form.password2.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+
+                <!-- Submit Button -->
+                <button type="submit" 
+                    class="w-full flex justify-center py-3 px-4 rounded-xl
+                    bg-gradient-to-r from-accent to-secondary hover:from-accent-light 
+                    hover:to-secondary-light text-white font-medium shadow-lg
+                    focus:outline-none focus:ring-2 focus:ring-offset-2 
+                    focus:ring-accent transform transition-all hover:scale-105">
+                    {% trans "Create Account" %}
+                </button>
+            </form>
+        </div>
+
+        <!-- Sign In Link -->
+        <div class="mt-6 text-center text-sm">
+            <p class="text-gray-400">
+                {% trans "Already have an account?" %}
+                <a href="{{ login_url }}" class="font-medium text-accent hover:text-accent-light ml-1">
+                    {% trans "Sign in here" %}
+                </a>
+            </p>
+        </div>
+    </div>
 </div>
-</div>
-{% endblock content %}
+{% endblock %}
