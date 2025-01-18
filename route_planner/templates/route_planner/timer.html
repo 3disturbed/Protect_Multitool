@@ -8,41 +8,54 @@
     <input type="text" id="pin" name="pin"><br><br>
     <input type="submit" value="Submit">
   </form>
-<script>
+  <script>
     document.addEventListener('DOMContentLoaded', function(){
-        let time = parseInt('{{ timer|safe }}', 10);  
-        console.log(`Starting countdown from: ${time} minutes`);
+        // Safely pass the initial time value (in minutes) from Django to JavaScript
+        const initialTime = parseInt('{{ timer|safe }}', 10);  // Parse as integer
+        console.log(`Initial time: ${initialTime} minutes`);
 
-        function startCountdown(minutes) {
-            let totalSeconds = minutes * 60;
+        // Retrieve the remaining time from localStorage, or set to initial value
+        let remainingSeconds = localStorage.getItem('remainingSeconds');
+        if (!remainingSeconds) {
+            remainingSeconds = initialTime * 60;  // Convert minutes to seconds
+            localStorage.setItem('remainingSeconds', remainingSeconds);
+        }
 
-
+        function startCountdown() {
             const timerInterval = setInterval(() => {
-                // Calculate minutes and seconds
-                const mins = Math.floor(totalSeconds / 60);
-                const secs = totalSeconds % 60;
+                // Retrieve the remaining time from localStorage
+                let seconds = parseInt(localStorage.getItem('remainingSeconds'), 10);
 
+                // Calculate minutes and seconds
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+
+                // Format time as MM:SS
                 const formattedTime = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
 
                 // Update the timer div
                 let timerDiv = document.querySelector('.timer');
                 if (timerDiv) {
-                    timerDiv.textContent = formattedTime;  //Display ctime
+                    timerDiv.textContent = formattedTime;  // Display time
                 }
 
                 // Stop the timer when it reaches 0
-                if (totalSeconds === 0) {
+                if (seconds <= 0) {
                     clearInterval(timerInterval);
                     console.log("Time's up!");
+                    localStorage.removeItem('remainingSeconds'); // Clear storage
+                } else {
+                    // Decrement and update the remaining time in localStorage
+                    seconds--;
+                    localStorage.setItem('remainingSeconds', seconds);
                 }
-
-                totalSeconds--;
-            }, 1000);
+            }, 1000); // Run every 1 second
         }
 
-        // Start the countdown using the time variable
-        startCountdown(time);
+        // Start the countdown
+        startCountdown();
     });
 </script>
+
 
 {% endblock %}
