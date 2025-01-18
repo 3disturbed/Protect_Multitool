@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2> PANIC BUTTON </h2>
+
+
+<button id="sendRequest">Send POST Request</button>
+<script>
+
+    let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|safe }}');
+
+    let contact_name = '';
+    let phone_number = '';
+    const first_name = "{{first_name}}"
+
+        document.getElementById('sendRequest').addEventListener('click', () => {
+            //For loop within event listener to count the contacts and make individual request for each
+            for (let i = 0; i < emergency_contacts_list.length; i++) {
+        contact_name = emergency_contacts_list[i].name; 
+        phone_number = emergency_contacts_list[i].phone_number; 
+        console.log(`Name: ${contact_name}, Number: ${phone_number}`);
+        console.log("Button clicked!");
+        // API request to send on loop for each contact
+        fetch(`{% url 'panic:handle_panic_event' %}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ recipient: phone_number,
+            sender: first_name,
+            contact: contact_name}),
+        })
+        .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}

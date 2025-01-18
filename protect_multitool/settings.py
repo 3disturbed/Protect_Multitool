@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'game',
     'home_page',
     'route_planner',
+    'panic',
+    'cases'
 ]
 
 MIDDLEWARE = [
