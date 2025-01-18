@@ -132,6 +132,35 @@
                             Emergency
                         </button>
                         {% endblock %}
+
+                        <!-- Emergency Modal -->
+                        <div id="emergencyModal" 
+                            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+                            <!-- Modal Content -->
+                            <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6 relative">
+                                <!-- Close Button -->
+                                <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+                                    ✕
+                                </button>
+                                <!-- Modal Body -->
+                                <h2 class="text-lg font-bold text-gray-900">Emergency Alert</h2>
+                                <p class="text-gray-700 mt-4">
+                                    Are you sure you want to call an emergency? If confirmed, this alert will be sent to the people in your contacts.
+                                </p>
+                                <!-- Action Buttons -->
+                                <div class="mt-6 flex justify-end space-x-3">
+                                    <button id="cancelBtn" 
+                                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                                        Cancel
+                                    </button>
+                                    <button id="confirmBtn" 
+                                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                                        Confirm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Mobile Menu Button -->
@@ -279,13 +308,50 @@
                 mobileMenu.classList.toggle('hidden');
             });
 
-            // Emergency button functionality
-            document.getElementById('emergencyBtn')?.addEventListener('click', function() {
-                // Add emergency functionality here
-                console.log('Emergency button clicked');
-            });
+            // // Emergency button functionality
+            // document.getElementById('emergencyBtn')?.addEventListener('click', function() {
+            //     // Add emergency functionality here
+            //     console.log('Emergency button clicked');
+            // });
         });
+
+        //Emergency Button
+        const emergencyBtn = document.getElementById('emergencyBtn');
+        const emergencyModal = document.getElementById('emergencyModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const confirmBtn = document.getElementById('confirmBtn');
+
+        // Open modal
+        emergencyBtn.addEventListener('click', () => {
+            emergencyModal.classList.remove('hidden');
+        });
+
+        // Close modal
+        const closeModal = () => {
+            emergencyModal.classList.add('hidden');
+        };
+
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Confirm action
+        confirmBtn.addEventListener('click', () => {
+            // Add your logic to send the emergency alert here
+            alert('Emergency alert has been sent!');
+            closeModal();
+        });
+
+        // Close modal when clicking outside
+        emergencyModal.addEventListener('click', (e) => {
+            if (e.target === emergencyModal) {
+                closeModal();
+            }
+        });
+
     </script>
+
+    <script src="{% static 'js/emergencyModal.js' %}" defer></script>
 
     <!-- Additional Scripts -->
     {% block extra_js %}{% endblock %}
