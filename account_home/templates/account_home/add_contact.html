@@ -1,17 +1,174 @@
 {% extends "base.html" %}
 {% load static %}
-{% block css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
-{% endblock %}
 
 {% block head_title %}Add Emergency Contact{% endblock head_title %}
 
 {% block content %}
-<h1>Add Emergency Contact</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
-</form>
-<a href="{% url 'account_home:emergency_contact_list' %}">Show Emergency Contacts</a>
-{% endblock content %}
+<div class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-md mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                Add Emergency Contact
+            </h1>
+            <p class="mt-2 text-sm text-gray-400">
+                Add a new emergency contact to your safety network
+            </p>
+        </div>
+
+        <!-- Form -->
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+            <form method="post" class="space-y-4" id="contactForm">
+                {% csrf_token %}
+                
+                <!-- Name Field -->
+                <div>
+                    <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-1">
+                        Name
+                    </label>
+                    <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border border-accent/10 focus:border-accent
+                                  focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           placeholder="Contact's full name"
+                           required>
+                </div>
+
+                <!-- Phone Field -->
+                <div>
+                    <label for="{{ form.phone.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-1">
+                        Phone Number
+                    </label>
+                    <input type="tel" name="{{ form.phone.name }}" id="{{ form.phone.id_for_label }}"
+                           class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                  bg-neutral-dark border border-accent/10 focus:border-accent
+                                  focus:outline-none focus:ring-1 focus:ring-accent
+                                  placeholder-gray-500 text-white"
+                           placeholder="+1234567890"
+                           pattern="\+\d{1,4}\d{7,15}"
+                           title="Phone number must be in international format (e.g., +1234567890)"
+                           required>
+                    <!-- Phone Error Message Container -->
+                    <div id="phone-error" class="hidden mt-2 text-sm text-red-400"></div>
+                </div>
+
+                <!-- Relationship Field -->
+                <div>
+                    <label for="{{ form.relationship.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-1">
+                        Relationship
+                    </label>
+                    <select name="{{ form.relationship.name }}" id="{{ form.relationship.id_for_label }}"
+                            class="appearance-none block w-full px-4 py-3 rounded-xl 
+                                   bg-neutral-dark border border-accent/10 focus:border-accent
+                                   focus:outline-none focus:ring-1 focus:ring-accent
+                                   text-white"
+                            required>
+                        <option value="">Select relationship</option>
+                        <option value="Family">Family</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Partner">Partner</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="flex items-center justify-end space-x-4 pt-4">
+                    <a href="{% url 'account_home:emergency_contact_list' %}" 
+                       class="px-4 py-2 rounded-xl border border-accent/10 hover:bg-accent/10 
+                       text-white font-medium transition-colors">
+                        Cancel
+                    </a>
+                    <button type="submit" 
+                            class="px-6 py-2 rounded-xl bg-gradient-to-r from-accent to-secondary 
+                                   hover:from-accent-light hover:to-secondary-light text-white 
+                                   font-medium shadow-lg transform transition-all hover:scale-105">
+                        Save Contact
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Limit Check Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Phone Validation
+        const phoneInput = document.getElementById('id_phone');
+        const phoneRegex = /^\+\d{1,4}\d{7,15}$/;
+        const submitBtn = document.getElementById('submitBtn');
+        let isPhoneValid = false;
+
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                let errorContainer = document.getElementById('phone-error');
+                
+                // Validate phone number
+                if (!phoneRegex.test(phoneInput.value)) {
+                    isPhoneValid = false;
+                    
+                    // Show error message
+                    if (!errorContainer) {
+                        errorContainer = document.getElementById('phone-error');
+                    }
+                    errorContainer.textContent = 'Invalid phone number format. Please use international format (e.g., +1234567890)';
+                    errorContainer.classList.remove('hidden');
+                    
+                    // Style the input as invalid
+                    phoneInput.classList.remove('border-accent/10');
+                    phoneInput.classList.add('border-red-500');
+                    
+                    // Disable submit button
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                } else {
+                    isPhoneValid = true;
+                    
+                    // Hide error message
+                    if (errorContainer) {
+                        errorContainer.classList.add('hidden');
+                    }
+                    
+                    // Style the input as valid
+                    phoneInput.classList.remove('border-red-500');
+                    phoneInput.classList.add('border-accent/10');
+                    
+                    // Enable submit button
+                    submitBtn.disabled = false;
+                    submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            });
+        }
+
+        // Contact Limit Check
+        const contactCount = {{ contacts|length }};
+        const maxContacts = 5;
+        const form = document.getElementById('contactForm');
+
+        if (contactCount >= maxContacts) {
+            // Disable the form
+            Array.from(form.elements).forEach(element => {
+                element.disabled = true;
+            });
+
+            // Add warning message
+            const warning = document.createElement('div');
+            warning.className = 'p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm mt-4';
+            warning.innerHTML = 'You have reached the maximum limit of 5 emergency contacts. Please remove an existing contact before adding a new one.';
+            form.parentNode.insertBefore(warning, form);
+
+            // Replace form with message
+            form.style.opacity = '0.5';
+            form.style.pointerEvents = 'none';
+        }
+
+        // Form Submission Validation
+        form.addEventListener('submit', function(event) {
+            if (!isPhoneValid) {
+                event.preventDefault();
+                alert('Please enter a valid phone number in international format.');
+            }
+        });
+    });
+</script>
+{% endblock %}
