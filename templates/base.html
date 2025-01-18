@@ -86,18 +86,25 @@
                     <div class="hidden md:flex items-center space-x-8">
                         {% block navigation %}
                         <a href="{% url 'home_page:home' %}" class="text-sm font-medium hover:text-accent transition-colors">Home</a>
-                        <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes
+                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes <!-- Redirect to Login -->
                             <span class="ml-1 px-1.5 py-0.5 text-xs bg-accent/20 rounded-md">New</span>
                         </a>
-                        <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
+                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center"> <!-- Redirect to Login -->
                             <span>Game</span>
                             <span class="ml-1 px-1.5 py-0.5 text-xs bg-accent/20 rounded-md">New</span>
                         </a>
-                        <!-- <a href="" class="text-sm font-medium hover:text-accent transition-colors">Resources</a> -->
                         {% endblock %}
                         
                         <!-- User Auth Section -->
                         {% if user.is_authenticated %}
+                        <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes <!-- If signed in, can access -->
+                            <span class="ml-1 px-1.5 py-0.5 text-xs bg-accent/20 rounded-md">New</span>
+                        </a>
+                        <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center"> <!-- If signed in, can access -->
+                            <span>Game</span>
+                            <span class="ml-1 px-1.5 py-0.5 text-xs bg-accent/20 rounded-md">New</span>
+                        </a>
+                        
                         <div x-data="{ open: false }" class="relative">
                             <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium hover:text-accent transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -128,6 +135,7 @@
                         {% endif %}
 
                         {% block emergency_button %}
+                         <!-- Desktop emergency -->
                         <button id="emergencyBtn" class="px-6 py-2 bg-accent text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
                             Emergency
                         </button>
@@ -173,13 +181,43 @@
 
                     <!-- Mobile Menu -->
                     <div id="mobile-menu" class="md:hidden mobile-menu hidden">
-                        <div class="space-y-4">
+                        <div class="space-y-4 pt-5">
                             <a href="{% url 'home_page:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Home</a>
                             <a href="{% url 'route_planner:planner' %}" class="block text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
                             <a href="{% url 'game:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Game</a>
                         </div>
+                        <!-- User Auth Section -->
+                        {% if user.is_authenticated %}
+                        <div x-data="{ open: false }" class="relative">
+                            <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium hover:text-accent transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                <span>{{ user.username }}</span>
+                            </button>
+                            <div x-show="open" @click.away="open = false" 
+                                class="absolute right-0 mt-2 w-48 rounded-xl shadow-lg py-1 backdrop-blur-md bg-neutral/90 ring-1 ring-accent/10">
+                                <a href="{% url 'account_home:emergency_contact_list' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Emergency Contacts</a>
+                                <a href="{% url 'account_email' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Email Settings</a>
+                                <a href="{% url 'account_change_password' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Change Password</a>
+                                <form method="post" action="{% url 'account_logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm hover:bg-accent/20 transition-colors">
+                                        Logout
+                                    </button>
+                                </form>
+                                {% else %}
+                                <a href="{% url 'account_login' %}" class="block text-sm font-medium hover:text-accent transition-colors mt-4 mb-4">Login</a>
+                                <a href="{% url 'account_signup' %}" class="font-medium px-4 py-2 bg-secondary/20 text-white rounded-xl hover:bg-secondary/30 transition-colors">
+                                    Register
+                                </a>
+                                {% endif %}
+                                <button id="emergencyBtn" class="block font-medium mt-4 px-6 py-2 bg-accent text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
+                                    Emergency
+                                </button>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
