@@ -1,14 +1,25 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block head_title %}Emergency Contacts{% endblock head_title %}
+
 {% block content %}
-    <h1>My Emergency Contacts</h1>
-    <ul>
-        {% for contact in contacts %}
-            <li>{{ contact.name }} ({{ contact.relationship }}) - {{ contact.phone }}</li>
+<h1>My Emergency Contacts</h1>
+<ul>
+    {% for contact in contacts %}
+        <li>
+            {{ contact.name }} ({{ contact.relationship }}) - {{ contact.phone }}
             <a href="{% url 'account_home:edit_emergency_contact' contact.pk %}">Edit</a>
             <a href="{% url 'account_home:delete_emergency_contact' contact.pk %}">Delete</a>
-        {% empty %}
-            <li>No contacts added yet.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'account_home:add_emergency_contact' %}">Add Emergency Contact</a>
-{% endblock %}
+        </li>
+    {% empty %}
+        <li>No contacts added yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'account_home:add_emergency_contact' %}">Add Emergency Contact</a>
+{% endblock content %}
+

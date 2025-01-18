@@ -1,10 +1,17 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h1>Add Emergency Contact</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    <a href="{% url 'account_home:emergency_contact_list' %}">Show Emergency Contact</a>
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock %}
+
+{% block head_title %}Add Emergency Contact{% endblock head_title %}
+
+{% block content %}
+<h1>Add Emergency Contact</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+<a href="{% url 'account_home:emergency_contact_list' %}">Show Emergency Contacts</a>
+{% endblock content %}
