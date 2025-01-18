@@ -1,34 +1,74 @@
 {# home_page/templates/home_page/home.html #}
 {% extends 'base.html' %}
 
-{% block title %}Welcome - Ctrl+Alt+Escape{% endblock %}
+{% block title %}Welcome - Protect Multi-Tool{% endblock %}
 
 {% block content %}
-<div class="bg-neutral-light rounded-xl p-8 shadow-lg">
-    <h1 class="text-4xl font-bold text-accent mb-4">Welcome to Ctrl+Alt+Escape</h1>
+<div class="flex flex-col items-center justify-center mt-10">
+    <h1 class="text-4xl font-bold text-accent mb-4">Welcome to Protect Multitool</h1>
     <p class="text-lg text-gray-300 mb-8">Your personal safety companion</p>
+</div>
+
     
-    <!-- Features Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Game Feature -->
-        <div class="p-6 bg-accent/20 rounded-xl hover:bg-accent/30 transition-all">
-            <h2 class="text-xl font-bold mb-2">Safety Game</h2>
-            <p class="mb-4">Learn safety tips through our interactive game</p>
-            <a href="{% url 'game:home' %}" class="text-accent hover:text-accent-light">Try it out →</a>
-        </div>
+<!-- Features Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Game Feature -->
+    <div class="p-6 bg-accent/20 rounded-xl hover:bg-accent/30 transition-all">
+        <h2 class="text-xl font-bold mb-2">Safety Game</h2>
+        <p class="mb-4">Learn safety tips through our interactive game</p>
+        <a href="{% url 'game:home' %}" class="text-accent hover:text-accent-light">Try it out →</a>
+    </div>
+    
+    <!-- Route Planner Feature -->
+    <div class="p-6 bg-secondary/20 rounded-xl hover:bg-secondary/30 transition-all">
+        <h2 class="text-xl font-bold mb-2">Route Planner</h2>
+        <p class="mb-4">Plan and share your travel routes with trusted contacts</p>
+        <a href="{% url 'route_planner:home' %}" class="text-secondary-light hover:text-secondary">Plan route →</a>
+    </div>
+    
+    <!-- Account Feature -->
+    <div class="p-6 bg-accent/20 rounded-xl hover:bg-accent/30 transition-all">
+        <h2 class="text-xl font-bold mb-2">Your Account</h2>
+        <p class="mb-4">Manage your emergency contacts and settings</p>
         
-        <!-- Route Planner Feature -->
-        <div class="p-6 bg-secondary/20 rounded-xl hover:bg-secondary/30 transition-all">
-            <h2 class="text-xl font-bold mb-2">Route Planner</h2>
-            <p class="mb-4">Plan and share your travel routes with trusted contacts</p>
-            <a href="{% url 'route_planner:home' %}" class="text-secondary-light hover:text-secondary">Plan route →</a>
+    </div>
+</div>
+
+<!-- Impacts of Human Trafficking Section -->
+<div class="mt-10 text-white bg-neutral-light rounded-xl p-8 shadow-lg">
+    <h2 class="text-3xl text-white text-center font-bold text-secondary mb-6">Impacts of Human Trafficking</h2>
+    <p class="text-lg text-white-300 mb-8">
+        Human trafficking occurs everywhere, but people are mainly trafficked from lower-income to higher-income countries.
+        Most victims of cross-border trafficking come from Africa, especially sub-Saharan Africa, and from South and East Asia.
+    </p>
+
+    <!-- Accordian the bottom content -->
+
+    <!-- Tile Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Tile 1 -->
+        <div class="p-6 bg-transparent border border-white/20 rounded-xl">
+            <h4 class="text-xl font-bold mb-2">Human trafficking is a widespread crime and a lucrative business</h4>
+            <p>Human trafficking is one of the fastest-growing crimes, along with drugs and arms trafficking,
+                and a highly profitable business, generating an estimated $150 billion in profits each year.
+            </p>
         </div>
-        
-        <!-- Account Feature -->
-        <div class="p-6 bg-accent/20 rounded-xl hover:bg-accent/30 transition-all">
-            <h2 class="text-xl font-bold mb-2">Your Account</h2>
-            <p class="mb-4">Manage your emergency contacts and settings</p>
-            
+
+        <!-- Tile 2 -->
+        <div class="p-6 bg-transparent border border-white/20 rounded-xl">
+            <h4 class="text-xl font-bold mb-2">Human trafficking thrives on poverty, conflict, and climate change</h4>
+            <p>Traffickers capitalize on desperation, disparity, and deficiency, targeting people who are vulnerable,
+                marginalized, or in difficult situations, including irregular or smuggled migrants and those in urgent need of work.
+            </p>
+        </div>
+
+        <!-- Tile 3 -->
+        <div class="p-6 bg-transparent border border-white/20 rounded-xl">
+            <h4 class="text-xl font-bold mb-2">Traffickers use deception and violence to exploit victims</h4>
+            <p>Taking advantage of the high demand for cheap labor, commercial sex, or other services, criminals exploit
+                weak governance and corrupt systems to carry out illegal activities. They may fraudulently promise a better
+                life, offer exciting jobs, or use outright violence to coerce vulnerable people into exploitation.
+            </p>
         </div>
     </div>
 </div>
