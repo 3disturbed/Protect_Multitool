@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if route %}
+    <p>Starting Location: {{ route.starting_location }}</p>
+    <p>Finishing Location: {{ route.finishing_location }}</p>
+    <p>With Who: {{ route.with_who }}</p>
+    <p>Time Limit: {{ route.time_limit }} minutes</p>
+    <p>Created At: {{ route.created_at }}</p>
+    {% if route.additional_info %}
+        <p>Additional Information: {{ route.additional_info }}</p>
+    {% endif %}
+{% else %}
+    <p>No route details available.</p>
+{% endif %}
+{% endblock %}

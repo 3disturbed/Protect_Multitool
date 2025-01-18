@@ -2,6 +2,25 @@
 {% load static %}
 
 {% block content %}
+<form id="emergency_lookup" method="post" action="{% url 'cases:emergency_lookup' %}">
+    {% csrf_token %}
+    <label for="phone">Phone Number:</label>
+    <input type="text" id="phone" name="phone" required>
+    <br>
+    <label for="secret_key">Secret Key:</label>
+    <input type="text" id="secret_key" name="secret_key" required>
+    <br>
+    <button type="submit">Lookup Route</button>
+</form>
+<script>
+    const emergencyForm = document.getElementById('emergency_lookup');
 
+    emergencyForm.addEventListener('submit', function (event) {
+        const phone = document.getElementById('phone').value;
+        const key = document.getElementById('secret_key').value;
 
+        // Log the form data for debugging purposes
+        console.log(`Submitting Phone: ${phone}, Secret Key: ${key}`);
+    });
+</script>
 {% endblock %}

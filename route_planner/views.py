@@ -51,13 +51,15 @@ def timer(request, id):
         print('No emergency contacts to display')
 
     emergency_contacts_json = json.dumps(emergency_contacts_list)
-    print(emergency_contacts_json)
 
     try:
         planned_route = PlannedRoute.objects.get(id=id, user=request.user)
     except PlannedRoute.DoesNotExist:
         # Handle the case where the route doesn't exist
         return redirect('route_planner:planner')
+    
+    if planned_route.secret_key:
+        secret_key = planned_route.secret_key
     
     context = {
         'emergency_contacts_list': emergency_contacts_json,
@@ -67,7 +69,6 @@ def timer(request, id):
         'pin': planned_route.pin_code,
         'id': planned_route.id,
     }
-    print(context['timer'])
     return render(request, 'route_planner/timer.html', context)
 
 @csrf_exempt
@@ -88,8 +89,8 @@ def verify_pin(request):
 
 
 @csrf_exempt
-@csrf_exempt
 def emergency_message(request):
+    print("CSRF exempt view is being called.")
     user = request.user
     accessKey = os.environ['ACCESS_KEY']
     namespaceId = os.environ['NAMESPACE_ID']
@@ -103,6 +104,11 @@ def emergency_message(request):
             contact = data.get("contact")
             id = data.get("id")
             planned_route = PlannedRoute.objects.get(id=id, user=request.user)
+            if planned_route.secret_key:
+                secret_key = planned_route.secret_key
+
+            print(secret_key)
+
             actual_code = planned_route.pin_code
 
 
@@ -133,7 +139,7 @@ def emergency_message(request):
                                 "default": sender
                             },
                             {
-                                "default": actual_code
+                                "default": secret_key
                             }
                           ]
                     }
