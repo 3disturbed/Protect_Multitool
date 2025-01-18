@@ -7,6 +7,7 @@ import requests
 import json
 import os
 
+
 # Create your views here.
 def panic_main(request):
     user = request.user
