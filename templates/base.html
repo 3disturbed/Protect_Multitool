@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Ctrl+Alt+Escape - Emergency Response System{% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'home_page/favicon.ico' %}">
+    <title>{% block title %}Protect Multi-Tool{% endblock %}</title>
     
     <!-- Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -86,8 +87,7 @@
                     <div class="hidden md:flex items-center space-x-8">
                         {% block navigation %}
                         <a href="{% url 'home_page:home' %}" class="text-sm font-medium hover:text-accent transition-colors">Home</a>
-                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes <!-- Redirect to Login -->
-                        </a>
+                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes</a> <!-- Redirect to Login -->
                         <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center"> <!-- Redirect to Login -->
                             <span>Game</span>
                         </a>
@@ -246,11 +246,7 @@
                 <!-- Mission Section - Left Side -->
                 <div class="lg:w-1/2">
                     {% block mission_content %}
-                    <h2 class="text-2xl font-bold text-accent mb-4">Our Mission</h2>
-                    <p class="text-gray-300 mb-6">
-                        At Protect Multi-Tool, we're committed to leveraging technology to protect and empower individuals at risk. 
-                        Our mission is to provide innovative solutions that make safety accessible to everyone, anywhere, anytime.
-                    </p>
+
                     <div class="flex flex-wrap gap-4">
                         <div class="flex items-center space-x-2 bg-accent/10 rounded-full px-4 py-2">
                             <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -275,7 +271,7 @@
                 </div>
             <!-- Footer Links Section - Right Side -->
                 <div class="lg:w-1/2">
-                    <div class="grid grid-cols-2 gap-8">
+                    <div class="grid grid-cols-4 gap-8">
                         <!-- Quick Links -->
                         <div>
                             <h3 class="text-lg font-bold text-accent mb-4">Quick Links</h3>
