@@ -86,18 +86,21 @@
                     <div class="hidden md:flex items-center space-x-8">
                         {% block navigation %}
                         <a href="{% url 'home_page:home' %}" class="text-sm font-medium hover:text-accent transition-colors">Home</a>
-                        <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes
-                            <span class="ml-1 px-1.5 py-0.5 text-xs bg-accent/20 rounded-md">New</span>
+                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes <!-- Redirect to Login -->
                         </a>
-                        <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
+                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center"> <!-- Redirect to Login -->
                             <span>Game</span>
-                            <span class="ml-1 px-1.5 py-0.5 text-xs bg-accent/20 rounded-md">New</span>
                         </a>
-                        <!-- <a href="" class="text-sm font-medium hover:text-accent transition-colors">Resources</a> -->
                         {% endblock %}
                         
                         <!-- User Auth Section -->
                         {% if user.is_authenticated %}
+                        <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes <!-- If signed in, can access -->
+                        </a>
+                        <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center"> <!-- If signed in, can access -->
+                            <span>Game</span>
+                        </a>
+                        
                         <div x-data="{ open: false }" class="relative">
                             <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium hover:text-accent transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -121,45 +124,19 @@
                         {% else %}
                         <div class="flex items-center space-x-4">
                             <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Login</a>
-                            <a href="{% url 'account_signup' %}" class="px-4 py-2 bg-secondary/20 text-white rounded-xl hover:bg-secondary/30 transition-colors">
+                            <a href="{% url 'account_signup' %}" class="px-4 py-2 font-medium bg-secondary/20 text-white rounded-xl hover:bg-secondary/30 transition-colors">
                                 Register
                             </a>
                         </div>
                         {% endif %}
 
                         {% block emergency_button %}
-                        <button id="emergencyBtn" class="px-6 py-2 bg-accent text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
+                         <!-- Desktop emergency -->
+                        <button id="emergencyBtnDesktop" class="px-6 py-2 font-medium bg-accent text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
                             Emergency
                         </button>
                         {% endblock %}
-
-                        <!-- Emergency Modal -->
-                        <div id="emergencyModal" 
-                            class="fixed inset-0 flex items-center justify-center hidden pt-20 mt-20 z-50">
-                            <!-- Modal Content -->
-                            <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6 relative">
-                                <!-- Close Button -->
-                                <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
-                                    ✕
-                                </button>
-                                <!-- Modal Body -->
-                                <h2 class="text-lg font-bold text-gray-900">Emergency Alert</h2>
-                                <p class="text-gray-700 mt-4">
-                                    Are you sure you want to call an emergency? If confirmed, this alert will be sent to the people in your contacts.
-                                </p>
-                                <!-- Action Buttons -->
-                                <div class="mt-6 flex justify-end space-x-3">
-                                    <button id="cancelBtn" 
-                                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
-                                        Cancel
-                                    </button>
-                                    <button id="confirmBtn" 
-                                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
-                                        Confirm
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <!-- Mobile Menu Button -->
@@ -173,17 +150,75 @@
 
                     <!-- Mobile Menu -->
                     <div id="mobile-menu" class="md:hidden mobile-menu hidden">
-                        <div class="space-y-4">
+                        <div class="space-y-4 pt-5">
                             <a href="{% url 'home_page:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Home</a>
                             <a href="{% url 'route_planner:planner' %}" class="block text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
                             <a href="{% url 'game:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Game</a>
                         </div>
+                        <!-- User Auth Section -->
+                        {% if user.is_authenticated %}
+                        <div x-data="{ open: false }" class="relative">
+                            <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium hover:text-accent transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                <span>{{ user.username }}</span>
+                            </button>
+                            <div x-show="open" @click.away="open = false" 
+                                class="absolute right-0 mt-2 w-48 rounded-xl shadow-lg py-1 backdrop-blur-md bg-neutral/90 ring-1 ring-accent/10">
+                                <a href="{% url 'account_home:emergency_contact_list' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Emergency Contacts</a>
+                                <a href="{% url 'account_email' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Email Settings</a>
+                                <a href="{% url 'account_change_password' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Change Password</a>
+                                <form method="post" action="{% url 'account_logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm hover:bg-accent/20 transition-colors">
+                                        Logout
+                                    </button>
+                                </form>
+                                {% else %}
+                                <a href="{% url 'account_login' %}" class="block text-sm font-medium hover:text-accent transition-colors mt-4 mb-4">Login</a>
+                                <a href="{% url 'account_signup' %}" class="font-medium px-4 py-2 bg-secondary/20 text-white rounded-xl hover:bg-secondary/30 transition-colors">
+                                    Register
+                                </a>
+                                {% endif %}
+                                <button id="emergencyBtnMobile" class="block font-medium mt-4 px-6 py-2 bg-accent text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
+                                    Emergency
+                                </button>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </nav>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" 
+    class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 px-5 mt-5 z-50">
+    <!-- Modal Content -->
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6 relative">
+            <!-- Close Button -->
+            <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+                ✕
+            </button>
+            <!-- Modal Body -->
+            <h2 class="text-lg font-bold text-gray-900">Emergency Alert</h2>
+            <p class="text-gray-700 mt-4">
+                Are you sure you want to call an emergency? If confirmed, this alert will be sent to the people in your contacts.
+            </p>
+            <!-- Action Buttons -->
+            <div class="mt-6 flex justify-end space-x-3">
+                <button id="cancelBtn" 
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">
+                    Cancel
+                </button>
+                <button id="confirmBtn" 
+                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Messages/Alerts -->
     {% if messages %}
@@ -318,51 +353,56 @@
             menuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
-
-            // // Emergency button functionality
-            // document.getElementById('emergencyBtn')?.addEventListener('click', function() {
-            //     // Add emergency functionality here
-            //     console.log('Emergency button clicked');
-            // });
         });
 
         //Emergency Button
-        const emergencyBtn = document.getElementById('emergencyBtn');
+        const emergencyBtnDesktop = document.getElementById('emergencyBtnDesktop');
+        const emergencyBtnMobile = document.getElementById('emergencyBtnMobile');
         const emergencyModal = document.getElementById('emergencyModal');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const cancelBtn = document.getElementById('cancelBtn');
         const confirmBtn = document.getElementById('confirmBtn');
 
         // Open modal
-        emergencyBtn.addEventListener('click', () => {
+        const openModal = () => {
             emergencyModal.classList.remove('hidden');
-        });
+        };
 
         // Close modal
         const closeModal = () => {
             emergencyModal.classList.add('hidden');
         };
 
-        closeModalBtn.addEventListener('click', closeModal);
-        cancelBtn.addEventListener('click', closeModal);
+        // Attach event listeners to both buttons
+        if (emergencyBtnDesktop) {
+            emergencyBtnDesktop.addEventListener('click', openModal);
+        }
+        if (emergencyBtnMobile) {
+            emergencyBtnMobile.addEventListener('click', openModal);
+        }
+
+        // Close modal actions
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 
         // Confirm action
-        confirmBtn.addEventListener('click', () => {
-            // Add your logic to send the emergency alert here
-            alert('Emergency alert has been sent!');
-            closeModal();
-        });
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                alert('Emergency alert has been sent!');
+                closeModal();
+            });
+        }
 
         // Close modal when clicking outside
-        emergencyModal.addEventListener('click', (e) => {
-            if (e.target === emergencyModal) {
-                closeModal();
-            }
-        });
+        if (emergencyModal) {
+            emergencyModal.addEventListener('click', (e) => {
+                if (e.target === emergencyModal) {
+                    closeModal();
+                }
+            });
+        }
 
     </script>
-
-    <script src="{% static 'js/emergencyModal.js' %}" defer></script>
 
     <!-- Additional Scripts -->
     {% block extra_js %}{% endblock %}
