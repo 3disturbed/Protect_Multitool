@@ -48,7 +48,7 @@
         <div class="max-w-7xl mx-auto px-4 py-3 relative">
             <div class="flex items-center justify-center space-x-3">
                 <span class="animate-pulse h-2 w-2 bg-white rounded-full"></span>
-                <p class="text-sm md:text-base font-medium">
+                <p class="text-sm md:text-base text font-medium">
                     Need immediate help? Call <span class="font-bold">911</span> or our 24/7 hotline: 
                     <a href="tel:{% if emergency_hotline %}{{ emergency_hotline }}{% else %}1-888-373-7888{% endif %}" 
                        class="font-bold hover:underline">
@@ -60,15 +60,15 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-40 top-8">
+    <nav class="fixed w-full z-40 top-9 h-16">
         <div class="mx-auto px-4 py-3">
             <div class="backdrop-blur-md bg-neutral/70 rounded-2xl shadow-lg px-6 py-4">
                 <div class="flex justify-between items-center">
                     <!-- Logo -->
                     <div class="flex items-center space-x-4">
                         <a href="{% url 'home_page:home' %}" class="flex items-center space-x-2">
-                            <img src="{% static 'home_page/logo.png' %}" alt="Logo" class="h-8 w-8 ">
-                            <span class="text-2xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                            <img src="{% static 'home_page/logo.png' %}" alt="Logo" class="h-8 w-8">
+                            <span class="text-2xl md:text-lg sm:text-md font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
                                 Protect Multi-Tool
                             </span>
                         </a>
@@ -185,7 +185,7 @@
 
     <!-- Emergency Modal -->
     <div id="emergencyModal" 
-    class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 px-5 mt-5 z-50">
+    class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 px-5 z-50">
     <!-- Modal Content -->
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6 relative">
             <!-- Close Button -->
@@ -260,14 +260,14 @@
                     </div>
                     {% endblock %}
                 </div>
-            <!-- Footer Links Section - Right Side -->
+                <!-- Footer Links Section - Right Side -->
                 <div class="lg:w-1/2">
-                    <div class="grid grid-cols-4 gap-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8">
                         <!-- Quick Links -->
                         <div>
                             <h3 class="text-lg font-bold text-accent mb-4">Quick Links</h3>
                             <ul class="space-y-2 text-sm text-gray-300">
-                                <li><a href="{% url 'home_page:home' %}" class="hover:text-accent transition-colors">About Us</a></li>
+                                <li><a href="{% url 'home_page:about' %}" class="hover:text-accent transition-colors">About Us</a></li>
                             </ul>
                         </div>
 
@@ -325,7 +325,7 @@
 
             <!-- Copyright -->
             <div class="mt-12 pt-8 border-t border-accent/20 text-center text-sm text-gray-400">
-                <p>&copy; {% now "Y" %} Ctrl+Alt+Escape. {% block footer_tagline %}Empowering safety through technology.{% endblock %}</p>
+                <p>&copy; {% now "Y" %} Protect Multi-Tool. {% block footer_tagline %}Empowering safety through technology.{% endblock %}</p>
             </div>
         </div>
     </footer>
