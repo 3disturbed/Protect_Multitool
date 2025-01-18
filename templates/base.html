@@ -160,7 +160,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <!-- Mobile Menu Button -->
@@ -169,6 +168,18 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
+
+                </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobile-menu" class="md:hidden mobile-menu hidden">
+                        <div class="space-y-4">
+                            <a href="{% url 'home_page:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Home</a>
+                            <a href="{% url 'route_planner:planner' %}" class="block text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
+                            <a href="{% url 'game:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Game</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
