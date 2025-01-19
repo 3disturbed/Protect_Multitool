@@ -30,6 +30,19 @@ let frameCount = 0;
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
 const playButton = document.getElementById('playButton');
+playButton.addEventListener('click', () => {
+    if (canvas.requestFullscreen) {
+        canvas.requestFullscreen();
+    } else if (canvas.mozRequestFullScreen) { // Firefox
+        canvas.mozRequestFullScreen();
+    } else if (canvas.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        canvas.webkitRequestFullscreen();
+    } else if (canvas.msRequestFullscreen) { // IE/Edge
+        canvas.msRequestFullscreen();
+    } 
+
+    playButton.style.display = 'none';
+});
 
 function resizeCanvas() {
     const maxWidth = window.innerWidth;
