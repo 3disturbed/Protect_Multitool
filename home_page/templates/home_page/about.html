@@ -5,84 +5,233 @@
 
 {% block content %}
 <div class="container mx-auto px-6 py-12">
-    <!-- About Header -->
-    <div class="mb-10 text-center">
-        <h1 class="text-5xl font-extrabold text-accent mb-4">About Us</h1>
-        <p class="text-lg text-gray-300">
-            Learn more about how Multitool Protector empowers individuals with tools for safety and security.
-        </p>
-    </div>
-
-    <!-- Introduction Section -->
-    <div class="bg-neutral-light/30 p-6 rounded-xl shadow-lg border border-accent/10 mb-8">
-        <h2 class="text-2xl font-bold text-accent mb-4">Staying Safe with Multitool Protector</h2>
-        <p class="text-gray-100">
-            In today’s world, personal safety is a top priority. Whether you're going on a date, meeting someone new, or walking through a park, unexpected dangers can lurk in ordinary situations. Multitool Protector provides the tools and confidence to protect yourself and your loved ones with just a click of a button.
-        </p>
-    </div>
-
-    <!-- Proactive Safety Section -->
-    <div class="bg-neutral-light/30 p-6 rounded-xl shadow-lg border border-accent/10 mb-8">
-        <h2 class="text-2xl font-bold text-accent mb-4">Proactive Safety Measures</h2>
-        <ul class="list-disc list-inside text-gray-100 space-y-2">
-            <li>
-                <span class="font-bold">Always Share Your Plans:</span> Log your plans and notify a trusted contact. Example: “Heading to Green Café to meet Sarah at 4 PM.”
-            </li>
-            <li>
-                <span class="font-bold">Trust Your Instincts:</span> If something feels off, trust your gut. Don’t hesitate to say no or leave a situation.
-            </li>
-            <li>
-                <span class="font-bold">Recognize Red Flags:</span> Watch for manipulative behaviors, such as excessive flattery or secrecy.
-            </li>
-            <li>
-                <span class="font-bold">Plan Ahead:</span> Know how to get home and set checkpoints for long journeys.
-            </li>
-        </ul>
-    </div>
-
-    <!-- Features Section -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <div class="bg-neutral-light/30 p-6 rounded-xl shadow-lg border border-accent/10">
-            <h3 class="text-xl font-bold text-accent mb-2">Real-Time Location Sharing</h3>
-            <p class="text-gray-100">Share your location with trusted contacts and automatically notify them if you don't check in as planned.</p>
-        </div>
-        <div class="bg-neutral-light/30 p-6 rounded-xl shadow-lg border border-accent/10">
-            <h3 class="text-xl font-bold text-accent mb-2">Emergency SOS Alerts</h3>
-            <p class="text-gray-100">Discreetly send an SOS alert to your contacts, including your real-time location.</p>
-        </div>
-        <div class="bg-neutral-light/30 p-6 rounded-xl shadow-lg border border-accent/10">
-            <h3 class="text-xl font-bold text-accent mb-2">Plan Logging</h3>
-            <p class="text-gray-100">Log trip details and set reminders for check-ins to keep yourself accountable and connected.</p>
+    <!-- Hero Section with Animated Background -->
+    <div class="relative overflow-hidden rounded-3xl mb-16 bg-gradient-to-r from-neutral-light to-neutral p-12">
+        <div class="absolute inset-0 bg-gradient-to-r from-accent/10 to-secondary/10 animate-pulse"></div>
+        <div class="relative z-10 text-center max-w-3xl mx-auto">
+            <h1 class="text-5xl font-extrabold mb-6">
+                <span class="bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                    Safety Shouldn't Be Silent
+                </span>
+            </h1>
+            <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                In a world where human trafficking affects millions and personal safety concerns are rising, 
+                we're dedicated to providing innovative, discreet protection tools that empower individuals to stay safe.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="backdrop-blur-md bg-neutral-light/30 rounded-xl px-6 py-3 border border-accent/10">
+                    <span class="text-2xl font-bold text-accent">40.3M+</span>
+                    <span class="text-gray-300 ml-2">People trapped in modern slavery</span>
+                </div>
+                <div class="backdrop-blur-md bg-neutral-light/30 rounded-xl px-6 py-3 border border-accent/10">
+                    <span class="text-2xl font-bold text-secondary">71%</span>
+                    <span class="text-gray-300 ml-2">Of trafficking victims are women and girls</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Target Audience Section -->
-    <div class="bg-neutral-light/30 p-6 rounded-xl shadow-lg border border-accent/10 mb-8">
-        <h2 class="text-2xl font-bold text-accent mb-4">Who Benefits from Multitool Protector?</h2>
-        <p class="text-gray-100 mb-4">
-            Multitool Protector is designed for everyone, from individuals seeking peace of mind to parents wanting to ensure their child’s safety.
-        </p>
-        <ul class="list-disc list-inside text-gray-100 space-y-2">
-            <li>
-                <span class="font-bold">For Women and Girls:</span> Gain security when meeting new people or walking alone.
-            </li>
-            <li>
-                <span class="font-bold">For Parents:</span> Stay connected with your child and be notified if they don’t check in.
-            </li>
-            <li>
-                <span class="font-bold">For Everyone:</span> Emergencies don’t discriminate. Anyone can benefit from a reliable safety tool.
-            </li>
-        </ul>
+    <!-- Impact Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 transform hover:scale-105 transition-all border border-accent/10">
+            <div class="flex items-center justify-center mb-4">
+                <div class="w-16 h-16 rounded-xl bg-accent/20 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="text-3xl font-bold text-accent mb-2 text-center">Rising Threats</div>
+            <div class="text-gray-300 text-center">
+                <p class="font-semibold mb-2">Why Protection Matters</p>
+                <p class="text-sm">Human trafficking and personal safety threats are increasing globally. Every 30 seconds, someone becomes a victim of trafficking. Prevention and quick response are crucial for survival.</p>
+            </div>
+        </div>
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 transform hover:scale-105 transition-all border border-accent/10">
+            <div class="flex items-center justify-center mb-4">
+                <div class="w-16 h-16 rounded-xl bg-secondary/20 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="text-3xl font-bold text-secondary mb-2 text-center">Vulnerability</div>
+            <div class="text-gray-300 text-center">
+                <p class="font-semibold mb-2">Who's At Risk?</p>
+                <p class="text-sm">Anyone can become a target. Women, children, travelers, and individuals in unfamiliar situations are particularly vulnerable. Most victims know their traffickers before being exploited.</p>
+            </div>
+        </div>
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 transform hover:scale-105 transition-all border border-accent/10">
+            <div class="flex items-center justify-center mb-4">
+                <div class="w-16 h-16 rounded-xl bg-accent/20 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="text-3xl font-bold text-accent mb-2 text-center">Prevention</div>
+            <div class="text-gray-300 text-center">
+                <p class="font-semibold mb-2">Taking Action</p>
+                <p class="text-sm">The first few hours are critical in preventing trafficking situations. Our tools provide immediate response capabilities and proactive safety measures to protect you before it's too late.</p>
+            </div>
+        </div>
     </div>
 
-    <!-- Mission Section -->
-    <div class="bg-neutral-light/30 p-6 rounded-xl shadow-lg border border-accent/10">
-        <h2 class="text-2xl font-bold text-accent mb-4">Our Mission</h2>
-        <p class="text-gray-100">
-            Protect Multitool is dedicated to empowering individuals by providing innovative safety solutions that integrate
-            seamlessly into daily life. Our mission is to leverage technology to create discreet, accessible, and effective tools
-            that enhance personal security, raise awareness about human trafficking and modern slavery, and foster a safer world for all.
-        </p>
+    <!-- Features Section with Icons -->
+    <div class="mb-16">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold mb-4 bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                Innovative Protection Tools
+            </h2>
+            <p class="text-gray-300">
+                In today's world, personal safety requires sophisticated yet discreet solutions. Our multi-tool approach combines 
+                everyday functionality with powerful emergency features, ensuring you're always protected without drawing unwanted attention.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <div class="group backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 hover:bg-neutral-light/40 transition-all border border-accent/10">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-all">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold ml-4 text-white">Location Tracking</h3>
+                </div>
+                <p class="text-gray-300">Real-time location sharing with trusted contacts and automatic notifications for missed check-ins.</p>
+            </div>
+
+            <div class="group backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 hover:bg-neutral-light/40 transition-all border border-accent/10">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-all">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold ml-4 text-white">Emergency SOS</h3>
+                </div>
+                <p class="text-gray-300">Discrete emergency alerts with one-touch activation and immediate location sharing.</p>
+            </div>
+
+            <div class="group backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 hover:bg-neutral-light/40 transition-all border border-accent/10">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center group-hover:bg-accent/30 transition-all">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold ml-4 text-white">Journey Planning</h3>
+                </div>
+                <p class="text-gray-300">Detailed journey logging with automated check-ins and route tracking.</p>
+            </div>
+            
+            <div class="group backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 hover:bg-neutral-light/40 transition-all border border-accent/10">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-all">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold ml-4 text-white">Discreet Game Mode</h3>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-gray-300">A disguised safety feature that appears as a casual game but contains a hidden emergency alert system.</p>
+                    <div class="pt-2 border-t border-secondary/20">
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-secondary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Looks like a regular mobile game
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-secondary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Hidden emergency trigger mechanism
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-secondary mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Instantly alerts emergency contacts
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Safety Tips Section -->
+    <div class="mb-16 backdrop-blur-md bg-neutral-light/30 rounded-3xl p-8 border border-accent/10">
+        <h2 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+            Essential Safety Tips
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Share Your Plans</h3>
+                        <p class="text-gray-300">Always inform trusted contacts about your whereabouts and expected return time.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Trust Your Instincts</h3>
+                        <p class="text-gray-300">If something feels wrong, it probably is. Don't hesitate to leave or seek help.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Stay Alert</h3>
+                        <p class="text-gray-300">Maintain awareness of your surroundings and avoid distractions in public places.</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white mb-1">Keep Connected</h3>
+                        <p class="text-gray-300">Regular check-ins with emergency contacts can prevent dangerous situations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center backdrop-blur-md bg-gradient-to-r from-accent/20 to-secondary/20 rounded-3xl p-12 border border-accent/10">
+        <h2 class="text-3xl font-bold mb-6 text-white">Be Part of Making Safety More Accessible</h2>
+        <p class="text-xl text-gray-300 mb-8">Help us develop and improve this safety initiative. Every contribution brings us closer to protecting those at risk</p>
+        <a href="{% url 'account_signup' %}" class="inline-flex items-center px-8 py-3 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
+            Get Started Now
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+            </svg>
+        </a>
     </div>
 </div>
 {% endblock %}
