@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Profile</h1>
+<p><strong>First Name:</strong> {{ profile.first_name|default:"Not Set" }}</p>
+<p><strong>Last Name:</strong> {{ profile.last_name|default:"Not Set" }}</p>
+<p><strong>Phone Number:</strong> {{ profile.phone_number|default:"Not Set" }}</p>
+{% endblock %}
+

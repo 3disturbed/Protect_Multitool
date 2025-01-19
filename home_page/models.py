@@ -9,13 +9,6 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     first_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)  # Added last name
-    emergency_contact = models.ForeignKey(
-        'self',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='emergency_contact_profiles'
-    )
 
     def save(self, *args, **kwargs):
         # Sync the first_name to the User model without causing recursion
@@ -33,17 +26,19 @@ class Profile(models.Model):
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
     if created:
-        # Create the Profile and synchronize first_name and last_name
-        profile = Profile.objects.create(user=instance)
-        profile.first_name = instance.first_name
-        profile.last_name = instance.last_name
-        profile.save()
+        # Create the Profile only if first_name or last_name exists
+        if instance.first_name or instance.last_name:
+            profile = Profile.objects.create(user=instance)
+            profile.first_name = instance.first_name
+            profile.last_name = instance.last_name
+            profile.save()
     else:
-        # Synchronize first_name and last_name on Profile update
-        profile = instance.profile
-        profile.first_name = instance.first_name
-        profile.last_name = instance.last_name
-        profile.save()
+        # Update the Profile only if it already exists
+        if hasattr(instance, 'profile'):
+            profile = instance.profile
+            profile.first_name = instance.first_name
+            profile.last_name = instance.last_name
+            profile.save()
 
 
 
