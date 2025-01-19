@@ -29,6 +29,9 @@ let frameCount = 0;
 
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
+
+
+// Handle fullscreen functionality
 const playButton = document.getElementById('playButton');
 playButton.addEventListener('click', () => {
     if (canvas.requestFullscreen) {
@@ -44,6 +47,8 @@ playButton.addEventListener('click', () => {
     playButton.style.display = 'none';
 });
 
+
+// Handle resizing
 function resizeCanvas() {
     const maxWidth = window.innerWidth;
     const maxHeight = window.innerHeight;
@@ -60,6 +65,15 @@ function resizeCanvas() {
     canvas.style.width = newWidth + 'px';
     canvas.style.height = newHeight + 'px';
 }
-
 window.addEventListener('resize', resizeCanvas);
 window.addEventListener('load', resizeCanvas);
+
+
+// Main game loop
+function gameLoop(timestamp) {
+
+    requestAnimationFrame(gameLoop);
+}
+
+// Start game loop
+gameLoop();
