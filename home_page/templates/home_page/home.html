@@ -5,7 +5,9 @@
 
 {% block content %}
 <div class="flex flex-col items-center justify-center mt-10">
-    <h1 class="text-4xl text-center font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-4">Welcome to Protect Multitool</h1>
+    <h1
+        class="text-4xl text-center font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-4">
+        Welcome to Protect Multitool</h1>
     <p class="text-xl font-bold text-gray-300 mb-8">Your personal safety companion</p>
 </div>
 
@@ -13,12 +15,13 @@
 {% if not user.is_authenticated %}
 <div class="text-accent text-center p-4 rounded-lg mb-1">
     <p class="text-md font-medium">
-        Please <a href="{% url 'account_login' %}" class="underline font-bold hover:text-gray-200">sign in</a> or 
-        <a href="{% url 'account_signup' %}" class="underline font-bold hover:text-gray-200">register</a> to our tools to keep you safe.
+        Please <a href="{% url 'account_login' %}" class="underline font-bold hover:text-gray-200">sign in</a> or
+        <a href="{% url 'account_signup' %}" class="underline font-bold hover:text-gray-200">register</a> to our tools
+        to keep you safe.
     </p>
 </div>
 {% endif %}
-    
+
 <!-- Features Grid -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     <!-- Game Feature -->
@@ -27,31 +30,34 @@
         <p class="mb-4">Learn safety tips through our interactive game</p>
         <a href="{% url 'game:home' %}" class="text-accent hover:text-accent-light">Try it out →</a>
     </div>
-    
+
     <!-- Route Planner Feature -->
     <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
         <h2 class="text-xl font-bold mb-2">Route Planner</h2>
         <p class="mb-4">Plan and share your travel routes with trusted contacts</p>
         <a href="{% url 'route_planner:home' %}" class="text-accent hover:text-accent-light">Plan route →</a>
     </div>
-    
+
     <!-- Account Feature -->
     <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
         <h2 class="text-xl font-bold mb-2">Your Account</h2>
         <p class="mb-4">Manage your emergency contacts and settings</p>
-        <a href="{% url 'account_home:emergency_contact_list' %}" class="text-accent hover:text-accent-light">Go to your account →</a>
+        <a href="{% url 'account_home:emergency_contact_list' %}" class="text-accent hover:text-accent-light">Go to your
+            account →</a>
     </div>
 </div>
 
 
 <!-- emergency button -->
- <div>
+<div>
     {% if user.is_authenticated %}
-    <button id="emergencyBtnDesktop" class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
-    Emergency
+    <button id="emergencyBtnDesktop"
+        class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
+        Emergency
     </button>
     {% else %}
-    <a href="{% url 'account_login' %}" class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+    <a href="{% url 'account_login' %}"
+        class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
         Emergency
     </a>
     {% endif %}
@@ -61,8 +67,10 @@
 <div class="mt-6 backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
     <h2 class="text-3xl text-white text-center font-bold mb-6">Our Mission</h2>
     <p class="text-lg text-white-300 mb-8">
-        Protect Multitool is dedicated to empowering individuals by providing innovative safety solutions that integrate seamlessly
-        into daily life. Our mission is to leverage technology to create discreet, accessible, and effective tools that enhance personal security,
+        Protect Multitool is dedicated to empowering individuals by providing innovative safety solutions that integrate
+        seamlessly
+        into daily life. Our mission is to leverage technology to create discreet, accessible, and effective tools that
+        enhance personal security,
         raise awareness about human trafficking and modern slavery, and foster a safer world for all.
     </p>
     <div class="mt-5 text-accent text-center text-2xl font-bold">
@@ -71,8 +79,7 @@
 </div>
 
 <!-- Emergency Modal -->
-<div id="emergencyModal" 
-    class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 px-5 z-50">
+<div id="emergencyModal" class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 px-5 z-50">
     <!-- Modal Content -->
     <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6 relative">
         <!-- Close Button -->
@@ -82,20 +89,135 @@
         <!-- Modal Body -->
         <h2 class="text-lg font-bold text-gray-900">Emergency Alert</h2>
         <p class="text-gray-700 mt-4">
-            Are you sure you want to call an emergency? If confirmed, this alert will be sent to the people in your contacts.
+            Are you sure you want to call an emergency? If confirmed, this alert will be sent to the people in your
+            contacts.
         </p>
         <!-- Action Buttons -->
         <div class="mt-6 flex justify-end space-x-3">
-            <button id="cancelBtn" 
-                class="px-5 py-3 bg-gray-200 text-xl text-gray-700 rounded-lg hover:bg-gray-300">
+            <button id="cancelBtn" class="px-5 py-3 bg-gray-200 text-xl text-gray-700 rounded-lg hover:bg-gray-300">
                 Cancel
             </button>
-            <button id="confirmBtn" 
-                class="px-5 py-3 bg-red-500 text-xl text-white rounded-lg hover:bg-red-600">
+            <button id="confirmBtn" class="px-5 py-3 bg-red-500 text-xl text-white rounded-lg hover:bg-red-600">
                 Confirm
             </button>
         </div>
     </div>
 </div>
 
+<script>
+    let latitude = '';
+    let longitude = '';
+    navigator.geolocation.getCurrentPosition((position) => {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        return latitude, longitude;
+    });
+
+    let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|escapejs }}');
+
+    let contact_name = '';
+    let phone_number = '';
+    const first_name = "{{first_name}}"
+
+    //Emergency Button
+    const emergencyBtnDesktop = document.getElementById('emergencyBtnDesktop');
+    const emergencyModal = document.getElementById('emergencyModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
+
+    // Open modal
+    const openModal = () => {
+        emergencyModal.classList.remove('hidden');
+    };
+
+    // Close modal
+    const closeModal = () => {
+        emergencyModal.classList.add('hidden');
+    };
+
+    // Attach event listeners to both buttons
+    if (emergencyBtnDesktop) {
+        emergencyBtnDesktop.addEventListener('click', openModal);
+    }
+
+    // Close modal actions
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    // Confirm action
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+            alert('Emergency alert has been sent!');
+            // For loop within event listener to count the contacts and make individual request for each
+            for (let i = 0; i < emergency_contacts_list.length; i++) {
+                contact_name = emergency_contacts_list[i].name;
+                phone_number = emergency_contacts_list[i].phone_number;
+                console.log(`Name: ${contact_name}, Number: ${phone_number}`);
+                console.log("Button clicked!");
+                if (latitude && longitude) {
+                    fetch(`{% url 'home_page:emergency_message_coordinates' %}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            recipient: phone_number,
+                            sender: first_name,
+                            contact: contact_name,
+                            latitude_info: latitude,
+                            longitude_info: longitude
+                        }),
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Response:', data);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                } else {
+                    fetch(`{% url 'home_page:emergency_message' %}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            recipient: phone_number,
+                            sender: first_name,
+                            contact: contact_name,
+                        }),
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Response:', data);
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            }
+            closeModal();
+        });
+    }
+
+    // Close modal when clicking outside
+    if (emergencyModal) {
+        emergencyModal.addEventListener('click', (e) => {
+            if (e.target === emergencyModal) {
+                closeModal();
+            }
+        });
+    }
+</script>
 {% endblock %}
