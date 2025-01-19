@@ -78,19 +78,15 @@
                     <div class="hidden md:flex items-center space-x-8">
                         {% block navigation %}
                         <a href="{% url 'home_page:home' %}" class="text-sm font-medium hover:text-accent transition-colors">Home</a>
-                        <!-- Redirect to Login -->
-                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
-                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
-                            <span>Game</span>
-                        </a>
+
                         <a href="{% url 'home_page:about' %}" class="text-sm font-medium hover:text-accent transition-colors">About</a>
                         {% endblock %}
                         
                         <!-- User Auth Section -->
                         {% if user.is_authenticated %}
-                        <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes <!-- If signed in, can access -->
+                        <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes
                         </a>
-                        <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center"> <!-- If signed in, can access -->
+                        <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
                             <span>Game</span>
                         </a>
                         
@@ -116,6 +112,11 @@
                         </div>
                         {% else %}
                         <div class="flex items-center space-x-4">
+                            <!-- Redirect to Login -->
+                            <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
+                            <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
+                                <span>Game</span>
+                            </a>
                             <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Login</a>
                             <a href="{% url 'account_signup' %}" class="px-4 py-2 font-medium bg-secondary/20 text-white rounded-xl hover:bg-secondary/30 transition-colors">
                                 Register
