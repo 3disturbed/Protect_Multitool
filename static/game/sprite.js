@@ -6,6 +6,7 @@ export default class Sprite {
         this.image.onload = () => {
             this.loaded = true;
         };
+        console.log(imageSrc);
         this.image.src = imageSrc;
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
