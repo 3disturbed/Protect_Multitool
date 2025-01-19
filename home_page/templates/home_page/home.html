@@ -51,17 +51,25 @@
 <!-- emergency button -->
 <div>
     {% if user.is_authenticated %}
-    <button id="emergencyBtnDesktop"
-        class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
-        Emergency
-    </button>
+        {% if emergency_contacts_check %}
+            <button id="emergencyBtnDesktop"
+                class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
+                Emergency
+            </button>
+        {% else %}
+            <a href="{% url 'account_home:add_emergency_contact' %}"
+                class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+                ADD CONTACTS
+            </a>
+        {% endif %}
     {% else %}
-    <a href="{% url 'account_login' %}"
-        class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
-        Emergency
-    </a>
+        <a href="{% url 'account_signup' %}"
+            class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+            Sign Up
+        </a>
     {% endif %}
 </div>
+
 
 <!-- Our Mission -->
 <div class="mt-6 backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">

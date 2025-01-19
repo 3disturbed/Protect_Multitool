@@ -30,14 +30,16 @@ def home(request):
                     'phone_number': contact.phone,
                 })
         else:
+            emergency_contacts_list = None
             print('No emergency contacts to display')
 
         # Serialize the list to JSON
         emergency_contacts_json = json.dumps(emergency_contacts_list)
-
+        emergency_contacts_check = emergency_contacts_list
         # Prepare context with JSON and first_name
         context = {
             'emergency_contacts_list': emergency_contacts_json,
+            'emergency_contacts_check': emergency_contacts_check,
             'first_name': first_name,
         }
     else:
