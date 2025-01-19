@@ -28,9 +28,9 @@ let walls = [];
 let frameCount = 0;
 
 const floorSprite = new Sprite({ ...FLOOR_SPRITE_CONFIG, x: 0, y: 0 });
-const surfaceSprite = new Sprite({ imageSrc: './images/surface.png', frameWidth: 32, frameHeight: 32, frames: 1, frameDelay: 100, scaleFactor: 3, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 32, height : 32, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
+const surfaceSprite = new Sprite({ imageSrc: surfaceImg, frameWidth: 32, frameHeight: 32, frames: 1, frameDelay: 100, scaleFactor: 3, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 32, height : 32, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
 const wallSprite = new Sprite({ 
-    imageSrc: './images/wall.png',  // Fixed 'mageSrc' to 'imageSrc'
+    imageSrc: wallImg,  // Fixed 'mageSrc' to 'imageSrc'
     frameWidth: 16, 
     frameHeight: 16, 
     frames: 1, 
@@ -50,7 +50,7 @@ const wallSprite = new Sprite({
     GullDistance: 0 
 });
 const plantSprite = new Sprite({ 
-    imageSrc: './images/plant.png', 
+    imageSrc: plantImg, 
     frameWidth: 64, 
     frameHeight: 64, 
     frames: 2,  // Changed from 1 to 2 frames
@@ -69,7 +69,7 @@ const plantSprite = new Sprite({
     alive: true, 
     GullDistance: 0 
 });
-const rockSprite = new Sprite({ imageSrc: './images/rock.png', frameWidth: 64, frameHeight: 64, frames: 1, frameDelay: 100, scaleFactor: 2, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 64, height: 64, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
+const rockSprite = new Sprite({ imageSrc: rockImg, frameWidth: 64, frameHeight: 64, frames: 1, frameDelay: 100, scaleFactor: 2, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 64, height: 64, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
 
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
