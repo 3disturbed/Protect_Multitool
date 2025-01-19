@@ -122,7 +122,8 @@ def handle_event_coordinates(request):
             contact = data.get("contact")
             longitude = data.get("longitude_info")
             latitude = data.get("latitude_info")
-            print(recipient, sender, contact, latitude, longitude)
+            joinedUrl = f"{latitude},{longitude}"
+            print(recipient, sender, contact, latitude, longitude, joinedUrl)
 
             if not recipient or not sender:
                 return JsonResponse({"error": "Missing 'recipient' or 'sender' in the request body"}, status=400)
@@ -138,25 +139,44 @@ def handle_event_coordinates(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos_coordinates_1",
+                        "templateName": "test_sos_coordinates_2",
                         "language": {
                             "policy": "deterministic",
                             "code": "en"
                         },
-                        "params": [
-                             {
-                                "default": contact
-                                                    },
+                          "components": [
                             {
-                                "default": sender
-                                                    },
-                            {
-                                "default": str(latitude)
-                                                    },
-                            {
-                                "default": str(longitude)
+                                "type": "body",
+                                "parameters": [
+                                    {
+                                        "type": "text",
+                                        "text": contact
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": sender
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": str(latitude)
+                                    },
+                                    {
+                                        "type": "text",
+                                        "text": str(longitude)
+                                    },
+                                ]
+                            },
+                                 {
+                                    "type": "button",
+                                    "sub_type": "url",
+                                     "parameters": [
+                                 {
+                                    "type": "text",
+                                    "text": joinedUrl
+                                    }
+                                 ]
                             }
-                          ]
+                        ]
                     }
                 }
             }
