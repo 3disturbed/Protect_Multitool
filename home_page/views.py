@@ -119,7 +119,7 @@ def emergency_message(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos_2",
+                        "templateName": "test_sos_alert",
                         "language": {
                             "policy": "deterministic",
                             "code": "en"
