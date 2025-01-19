@@ -101,6 +101,7 @@
                             </button>
                             <div x-show="open" @click.away="open = false" 
                                 class="absolute right-0 mt-2 w-48 rounded-xl shadow-lg py-1 backdrop-blur-md bg-neutral/90 ring-1 ring-accent/10">
+                                <a href="{% url 'home_page:profile_handler' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Profile</a>
                                 <a href="{% url 'account_home:emergency_contact_list' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Emergency Contacts</a>
                                 <a href="{% url 'account_email' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Email Settings</a>
                                 <a href="{% url 'account_change_password' %}" class="block px-4 py-2 text-sm hover:bg-accent/20 transition-colors">Change Password</a>
