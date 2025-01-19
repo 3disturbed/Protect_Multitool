@@ -2,16 +2,42 @@
 {% load static %}
 
 {% block content %}
-<form id="emergency_lookup" method="post" action="{% url 'cases:emergency_lookup' %}">
-    {% csrf_token %}
-    <label for="phone">Phone Number:</label>
-    <input type="text" id="phone" name="phone" required>
-    <br>
-    <label for="secret_key">Secret Key:</label>
-    <input type="text" id="secret_key" name="secret_key" required>
-    <br>
-    <button type="submit">Lookup Route</button>
-</form>
+<!-- Header Section -->
+<div class="text-center mb-8">
+    <h1 class="mt-10 text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-2">
+        Emergency Lookup
+    </h1>
+</div>
+
+<div class="mt-2 flex items-center justify-center bg-neutral px-4">
+    <div class="w-full max-w-md backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+        <form id="emergency_lookup" method="post" action="{% url 'cases:emergency_lookup' %}" class="space-y-6">
+            {% csrf_token %}
+            <!-- Phone Number -->
+             <div>
+                <label for="phone" class="block text-sm font-medium text-gray-300 mb-1">Phone Number</label>
+                <input type="text" id="phone" name="phone" placeholder="Enter your phone number here" required
+                    class="appearance-none block w-full px-4 py-3 rounded-xl bg-neutral-dark border border-accent/10 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent placeholder-gray-500 text-white2">
+            </div>  
+
+            <!-- Secret Key -->
+            <div>
+                <label for="secret_key" class="block text-sm font-medium text-gray-300 mb-1">Secret Key</label>
+                <input type="text" id="secret_key" name="secret_key" placeholder="Enter the secret key here" required
+                    class="appearance-none block w-full px-4 py-3 rounded-xl bg-neutral-dark border border-accent/10 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent placeholder-gray-500 text-white">
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit"
+                    class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
+                    Lookup Route
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script>
     const emergencyForm = document.getElementById('emergency_lookup');
 
