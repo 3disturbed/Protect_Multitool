@@ -1,4 +1,3 @@
-
 // Sprite class for creating and rendering sprites
 export default class Sprite {
     constructor({ imageSrc, frameWidth, frameHeight, frames, frameDelay, scaleFactor, opacity, rotation, yFrame, x, y, width, height, velocity, boyancy, jump, alive, GullDistance }) {
@@ -27,20 +26,21 @@ export default class Sprite {
         this.GullDistance = GullDistance;
         this.currentFrame = 0;
         this.frameTimer = 0;
+        this.lastUpdate = Date.now(); // Add this line
     }
 
-    update(deltaTime) {
-        if (!deltaTime) return;
-        
-        this.frameTimer += deltaTime;
-        if (this.frameTimer >= this.frameDelay) {
+    update() {
+        const now = Date.now();
+        if (now - this.lastUpdate >= this.frameDelay) {
             this.currentFrame = (this.currentFrame + 1) % this.frames;
-            this.frameTimer = 0;
+            this.lastUpdate = now;
         }
     }
 
     draw(context) {
         if (!this.loaded) return;
+        
+        this.update(); // Add this line to update animation
         
         context.save();
         context.globalAlpha = this.opacity;

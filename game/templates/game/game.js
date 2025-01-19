@@ -30,6 +30,28 @@ let frameCount = 0;
 const floorSprite = new Sprite({ ...FLOOR_SPRITE_CONFIG, x: 0, y: 0 });
 const surfaceSprite = new Sprite({ imageSrc: './images/surface.png', frameWidth: 32, frameHeight: 32, frames: 1, frameDelay: 100, scaleFactor: 3, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 32, height : 32, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
 const wallSprite = new Sprite({ mageSrc: './images/wall.png', frameWidth: 16, frameHeight: 16, frames: 1, frameDelay: 100, scaleFactor: 3, opacity: 1,  rotation: 0, yFrame: 0, x: 0, y: 0, width: 16, height: 16, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
+const plantSprite = new Sprite({ 
+    imageSrc: './images/plant.png', 
+    frameWidth: 64, 
+    frameHeight: 64, 
+    frames: 2,  // Changed from 1 to 2 frames
+    frameDelay: 1500, // Added longer delay for plant animation
+    scaleFactor: 1.9, 
+    opacity: 1, 
+    rotation: 0, 
+    yFrame: 0, 
+    x: 0, 
+    y: 0, 
+    width: 64, 
+    height: 64, 
+    velocity: 0, 
+    boyancy: 0, 
+    jump: 0, 
+    alive: true, 
+    GullDistance: 0 
+});
+const rockSprite = new Sprite({ imageSrc: './images/rock.png', frameWidth: 64, frameHeight: 64, frames: 1, frameDelay: 100, scaleFactor: 2, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 64, height: 64, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
+
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
 
@@ -72,6 +94,84 @@ window.addEventListener('resize', resizeCanvas);
 window.addEventListener('load', resizeCanvas);
 
 
+// Clutter the game with some decorations
+
+function spawnDecoration() {
+    if (Math.random() < 0.02) {
+        const isPlant = Math.random() < 0.5;
+        const randomScale = isPlant ? 
+            1.2 + Math.random() * 8.3 :  // Plant scale between 1.2 and 3.5
+            1.4 + Math.random() * 5.1;   // Rock scale between 1.4 and 3.5
+        
+        // Calculate y position based on scale to ensure grounding
+        const spriteHeight = (isPlant ? 64 : 64) * randomScale;
+        const yPos = 1320 - spriteHeight; // Floor is at 1150
+        
+        decorations.push({
+            sprite: isPlant ? plantSprite : rockSprite,
+            x: canvas.width,
+            y: yPos,
+            passed: false,
+            scaleFactor: randomScale,
+            parallaxFactor: 0.5 + (1 / randomScale) // Bigger objects move slower
+        });
+    }
+}
+
+function prewarmDecorations() {
+    for (let x = 0; x < canvas.width; x += 200) {
+        if (Math.random() < 0.5) {
+            const isPlant = Math.random() < 0.5;
+            const randomScale = isPlant ? 
+                1.2 + Math.random() * 8.3 :
+                1.4 + Math.random() * 5.1;
+            
+            const spriteHeight = (isPlant ? 64 : 64) * randomScale;
+            const yPos = 1300 - spriteHeight;
+            
+            decorations.push({
+                sprite: isPlant ? plantSprite : rockSprite,
+                x: x,
+                y: yPos,
+                passed: false,
+                scaleFactor: randomScale,
+                parallaxFactor: 0.5 + (1 / randomScale)
+            });
+        }
+    }
+}
+
+function updateDecorations() {
+    // Remove decorations when they're one full screen width off the left edge
+    decorations = decorations.filter(dec => dec.x > -canvas.width);
+    decorations.forEach(dec => {
+        dec.x -= SCROLL_SPEED * dec.parallaxFactor;
+    });
+}
+
+function drawDecorations(context) {
+    // First pass: Draw plants (foreground)
+    decorations.forEach(dec => {
+        if (dec.sprite === plantSprite) {
+            dec.sprite.setPosition(dec.x, dec.y);
+            dec.sprite.scaleFactor = dec.scaleFactor;
+            dec.sprite.draw(context);
+        }
+    });
+
+
+
+    // Second pass: Draw rocks (background)
+    decorations.forEach(dec => {
+        if (dec.sprite === rockSprite) {
+            dec.sprite.setPosition(dec.x, dec.y);
+            dec.sprite.scaleFactor = dec.scaleFactor;
+            dec.sprite.draw(context);
+        }
+    });
+    
+}   
+
 
 // Block in the background
 function drawBackground(context) {
@@ -111,9 +211,15 @@ function drawFloor(context) {
 }
 // Main game loop
 function gameLoop(timestamp) {
+    if (!gameStarted) {
+        prewarmDecorations();
+        gameStarted = true;
+    }
     drawBackground(context);
     drawFloor(context);
-
+    spawnDecoration();
+    updateDecorations();
+    drawDecorations(context);
     drawUI(context);
     requestAnimationFrame(gameLoop);
 }
