@@ -6,9 +6,18 @@
 {% block content %}
 <div class="flex flex-col items-center justify-center mt-10">
     <h1 class="text-4xl text-center font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-4">Welcome to Protect Multitool</h1>
-    <p class="text-lg text-gray-300 mb-8">Your personal safety companion</p>
+    <p class="text-xl font-bold text-gray-300 mb-8">Your personal safety companion</p>
 </div>
 
+<!-- Sign-in Reminder -->
+{% if not user.is_authenticated %}
+<div class="text-accent text-center p-4 rounded-lg mb-1">
+    <p class="text-md font-medium">
+        Please <a href="{% url 'account_login' %}" class="underline font-bold hover:text-gray-200">sign in</a> or 
+        <a href="{% url 'account_signup' %}" class="underline font-bold hover:text-gray-200">register</a> to our tools to keep you safe.
+    </p>
+</div>
+{% endif %}
     
 <!-- Features Grid -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -34,19 +43,59 @@
     </div>
 </div>
 
-<!-- Impacts of Human Trafficking Section -->
-<div class="mt-10 backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
-    <h2 class="text-3xl text-white text-center font-bold mb-6">Our Mission</h2>
-    <p class="text-lg text-white-300 mb-8">
-        Our mission at is to empower individuals — especially women, girls,
-        and young people with the tools and knowledge they need to stay safe and connected in
-        an increasingly uncertain world.
-    </p>
 
+<!-- emergency button -->
+ <div>
+    {% if user.is_authenticated %}
+    <button id="emergencyBtnDesktop" class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
+    Emergency
+    </button>
+    {% else %}
+    <a href="{% url 'account_login' %}" class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+        Emergency
+    </a>
+    {% endif %}
 </div>
 
-<div class="mt-5 text-accent text-center text-2xl font-bold">
-    <a href="{% url 'home_page:about' %}">Learn More</a>
+<!-- Our Mission -->
+<div class="mt-6 backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+    <h2 class="text-3xl text-white text-center font-bold mb-6">Our Mission</h2>
+    <p class="text-lg text-white-300 mb-8">
+        Protect Multitool is dedicated to empowering individuals by providing innovative safety solutions that integrate seamlessly
+        into daily life. Our mission is to leverage technology to create discreet, accessible, and effective tools that enhance personal security,
+        raise awareness about human trafficking and modern slavery, and foster a safer world for all.
+    </p>
+    <div class="mt-5 text-accent text-center text-2xl font-bold">
+        <a href="{% url 'home_page:about' %}">Learn More</a>
+    </div>
+</div>
+
+<!-- Emergency Modal -->
+<div id="emergencyModal" 
+    class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 px-5 z-50">
+    <!-- Modal Content -->
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-auto p-6 relative">
+        <!-- Close Button -->
+        <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+            ✕
+        </button>
+        <!-- Modal Body -->
+        <h2 class="text-lg font-bold text-gray-900">Emergency Alert</h2>
+        <p class="text-gray-700 mt-4">
+            Are you sure you want to call an emergency? If confirmed, this alert will be sent to the people in your contacts.
+        </p>
+        <!-- Action Buttons -->
+        <div class="mt-6 flex justify-end space-x-3">
+            <button id="cancelBtn" 
+                class="px-5 py-3 bg-gray-200 text-xl text-gray-700 rounded-lg hover:bg-gray-300">
+                Cancel
+            </button>
+            <button id="confirmBtn" 
+                class="px-5 py-3 bg-red-500 text-xl text-white rounded-lg hover:bg-red-600">
+                Confirm
+            </button>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
