@@ -15,6 +15,18 @@ import {
     // ... import other constants
 } from './constants.js';
 
+let gameStarted = false;
+let canKick = true;
+let kickCooldown = 0;
+let score = 0;
+let highScore = 0;
+let pipes = [];
+let surfaceOffset = 0;
+let floorOffset = 0;
+let decorations = [];
+let walls = [];
+let frameCount = 0;
+
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
 const playButton = document.getElementById('playButton');
