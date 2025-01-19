@@ -12,7 +12,16 @@
 <script type="module" src="{% static 'game/sprite.js' %}"></script>
 <script type="module" src="{% static 'game/frog.js' %}"></script>
 <script type="module" src="{% static 'game/game.js' %}"></script>
+<script >
+    const floorImg = new Image("{% static 'game/floor.png' %}");
+    const frogImg = new Image("{% static 'game/frog.png' %}");
+    const plantImg = new Image("{% static 'game/plant.png' %}");
+    const rockImg = new Image("{% static 'game/rock.png' %}");
+    const surfaceImg = new Image("{% static 'game/surface.png' %}");
+    
+</script>
 <script>
+    
     let latitude = '';
     let longitude = '';
     navigator.geolocation.getCurrentPosition((position) => {
