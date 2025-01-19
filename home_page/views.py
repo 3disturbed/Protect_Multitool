@@ -119,7 +119,7 @@ def emergency_message(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos_alert",
+                        "templateName": "test_sos",
                         "language": {
                             "policy": "deterministic",
                             "code": "en"
@@ -193,7 +193,7 @@ def emergency_message_coordinates(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos_coordinates_2",
+                        "templateName": "test_sos_coordinates",
                         "language": {
                             "policy": "deterministic",
                             "code": "en"

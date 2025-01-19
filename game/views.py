@@ -64,7 +64,7 @@ def handle_event(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos_2",
+                        "templateName": "test_sos",
                         "language": {
                             "policy": "deterministic",
                             "code": "en"
@@ -136,7 +136,7 @@ def handle_event_coordinates(request):
                 "content": {
                     "hsm": {
                         "namespace": namespaceId,
-                        "templateName": "test_sos_coordinates_2",
+                        "templateName": "test_sos_coordinates",
                         "language": {
                             "policy": "deterministic",
                             "code": "en"
