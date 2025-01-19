@@ -6,6 +6,9 @@ from account_home.models import EmergencyContact
 import requests
 import json
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -43,12 +46,12 @@ def handle_event(request):
     channelId = os.environ['CHANNEL_ID']
     if request.method == 'POST':
         try:
+
  
             data = json.loads(request.body)
             recipient = data.get("recipient")
             sender = data.get("sender")
             contact = data.get("contact")
-
 
             if not recipient or not sender:
                 return JsonResponse({"error": "Missing 'recipient' or 'sender' in the request body"}, status=400)
@@ -75,6 +78,83 @@ def handle_event(request):
                                                     },
                             {
                                 "default": sender
+                            }
+                          ]
+                    }
+                }
+            }
+
+
+            headers = {
+                "Authorization": os.environ['ACCESS_KEY'],
+                "Content-Type": "application/json",
+            }
+
+
+            response = requests.post(external_url, json=external_data, headers=headers)
+
+            if response.status_code == 200:
+                return JsonResponse({"message": "Request to external API succeeded", "response": response.json()}, status=200)
+            else:
+                return JsonResponse(
+                    {"error": "External API request failed", "details": response.text},
+                    status=response.status_code
+                )
+
+        except Exception as e:
+            return JsonResponse({"error": "An unexpected error occurred", "details": str(e)}, status=500)
+
+    return JsonResponse({"error": "Invalid request method. Only POST is allowed."}, status=400)
+
+
+@login_required
+@csrf_exempt
+def handle_event_coordinates(request):
+    accessKey = os.environ['ACCESS_KEY']
+    namespaceId = os.environ['NAMESPACE_ID']
+    channelId = os.environ['CHANNEL_ID']
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)  # Parse JSON payload
+
+            recipient = data.get("recipient")
+            sender = data.get("sender")
+            contact = data.get("contact")
+            longitude = data.get("longitude_info")
+            latitude = data.get("latitude_info")
+            print(recipient, sender, contact, latitude, longitude)
+
+            if not recipient or not sender:
+                return JsonResponse({"error": "Missing 'recipient' or 'sender' in the request body"}, status=400)
+
+
+            external_url = "https://conversations.messagebird.com/v1/send"
+
+
+            external_data = {
+                "type": "hsm",
+                "to": recipient,
+                "from": channelId,
+                "content": {
+                    "hsm": {
+                        "namespace": namespaceId,
+                        "templateName": "test_sos_coordinates_1",
+                        "language": {
+                            "policy": "deterministic",
+                            "code": "en"
+                        },
+                        "params": [
+                             {
+                                "default": contact
+                                                    },
+                            {
+                                "default": sender
+                                                    },
+                            {
+                                "default": str(latitude)
+                                                    },
+                            {
+                                "default": str(longitude)
                             }
                           ]
                     }
