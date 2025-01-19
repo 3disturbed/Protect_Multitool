@@ -299,50 +299,6 @@
                 mobileMenu.classList.toggle('hidden');
             });
         });
-
-        //Emergency Button
-        const emergencyBtnDesktop = document.getElementById('emergencyBtnDesktop');
-        const emergencyModal = document.getElementById('emergencyModal');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const confirmBtn = document.getElementById('confirmBtn');
-
-        // Open modal
-        const openModal = () => {
-            emergencyModal.classList.remove('hidden');
-        };
-
-        // Close modal
-        const closeModal = () => {
-            emergencyModal.classList.add('hidden');
-        };
-
-        // Attach event listeners to both buttons
-        if (emergencyBtnDesktop) {
-            emergencyBtnDesktop.addEventListener('click', openModal);
-        }
-
-        // Close modal actions
-        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-        if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
-
-        // Confirm action
-        if (confirmBtn) {
-            confirmBtn.addEventListener('click', () => {
-                alert('Emergency alert has been sent!');
-                closeModal();
-            });
-        }
-
-        // Close modal when clicking outside
-        if (emergencyModal) {
-            emergencyModal.addEventListener('click', (e) => {
-                if (e.target === emergencyModal) {
-                    closeModal();
-                }
-            });
-        }
-
     </script>
 
     <!-- Additional Scripts -->
