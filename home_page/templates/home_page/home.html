@@ -6,9 +6,18 @@
 {% block content %}
 <div class="flex flex-col items-center justify-center mt-10">
     <h1 class="text-4xl text-center font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-4">Welcome to Protect Multitool</h1>
-    <p class="text-lg text-gray-300 mb-8">Your personal safety companion</p>
+    <p class="text-xl font-bold text-gray-300 mb-8">Your personal safety companion</p>
 </div>
 
+<!-- Sign-in Reminder -->
+{% if not user.is_authenticated %}
+<div class="text-accent text-center p-4 rounded-lg mb-1">
+    <p class="text-md font-medium">
+        Please <a href="{% url 'account_login' %}" class="underline font-bold hover:text-gray-200">sign in</a> or 
+        <a href="{% url 'account_signup' %}" class="underline font-bold hover:text-gray-200">register</a> to our tools to keep you safe.
+    </p>
+</div>
+{% endif %}
     
 <!-- Features Grid -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -37,9 +46,15 @@
 
 <!-- emergency button -->
  <div>
+    {% if user.is_authenticated %}
     <button id="emergencyBtnDesktop" class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg">
     Emergency
     </button>
+    {% else %}
+    <a href="{% url 'account_login' %}" class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+        Emergency
+    </a>
+    {% endif %}
 </div>
 
 <!-- Our Mission -->

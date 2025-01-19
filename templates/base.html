@@ -49,7 +49,7 @@
             <div class="flex items-center justify-center space-x-3">
                 <span class="animate-pulse h-2 w-2 bg-white rounded-full"></span>
                 <p class="text-sm md:text-base text font-medium">
-                    Need immediate help? Call <span class="font-bold">911</span> or our 24/7 hotline: 
+                    Need immediate help? Call <span class="font-bold">999</span> or our 24/7 hotline: 
                     <a href="tel:{% if emergency_hotline %}{{ emergency_hotline }}{% else %}1-888-373-7888{% endif %}" 
                        class="font-bold hover:underline">
                         {% if emergency_hotline %}{{ emergency_hotline }}{% else %}1-888-373-7888{% endif %}
@@ -78,10 +78,12 @@
                     <div class="hidden md:flex items-center space-x-8">
                         {% block navigation %}
                         <a href="{% url 'home_page:home' %}" class="text-sm font-medium hover:text-accent transition-colors">Home</a>
-                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes</a> <!-- Redirect to Login -->
-                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center"> <!-- Redirect to Login -->
+                        <!-- Redirect to Login -->
+                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
+                        <a href="{% url 'account_login' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
                             <span>Game</span>
                         </a>
+                        <a href="{% url 'home_page:about' %}" class="text-sm font-medium hover:text-accent transition-colors">About</a>
                         {% endblock %}
                         
                         <!-- User Auth Section -->
@@ -135,11 +137,18 @@
                     <div id="mobile-menu" class="md:hidden mobile-menu hidden">
                         <div class="space-y-4 pt-5">
                             <a href="{% url 'home_page:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Home</a>
-                            <a href="{% url 'route_planner:planner' %}" class="block text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
-                            <a href="{% url 'game:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Game</a>
+                            <!-- Redirect to Login -->
+                            <a href="{% url 'account_login' %}" class="block text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
+                            <a href="{% url 'account_login' %}" class="block text-sm font-medium hover:text-accent transition-colors flex items-center">
+                                <span>Game</span>
+                            </a>
+                            <a href="{% url 'home_page:about' %}" class="block text-sm font-medium hover:text-accent transition-colors">About</a>
                         </div>
                         <!-- User Auth Section -->
                         {% if user.is_authenticated %}
+                        <a href="{% url 'route_planner:planner' %}" class="block text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
+                        <a href="{% url 'game:home' %}" class="block text-sm font-medium hover:text-accent transition-colors">Game</a>
+
                         <div x-data="{ open: false }" class="relative">
                             <button @click="open = !open" class="flex items-center space-x-2 text-sm font-medium hover:text-accent transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
