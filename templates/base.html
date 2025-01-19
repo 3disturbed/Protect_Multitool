@@ -49,11 +49,7 @@
             <div class="flex items-center justify-center space-x-3">
                 <span class="animate-pulse h-2 w-2 bg-white rounded-full"></span>
                 <p class="text-sm md:text-base text font-medium">
-                    Need immediate help? Call <span class="font-bold">999</span> or our 24/7 hotline: 
-                    <a href="tel:{% if emergency_hotline %}{{ emergency_hotline }}{% else %}1-888-373-7888{% endif %}" 
-                       class="font-bold hover:underline">
-                        {% if emergency_hotline %}{{ emergency_hotline }}{% else %}1-888-373-7888{% endif %}
-                    </a>
+                    Need immediate help? Call <span class="font-bold">999</span> or our 24/7 hotline: <span class="font-bold">1-888-373-7888</span> 
                 </p>
             </div>
         </div>
@@ -204,11 +200,9 @@
     <footer class="bg-neutral border-t border-accent/20">
         <div class="max-w-7xl mx-auto px-4 py-12">
             <!-- Mission and Quick Links Container -->
-            <div class="flex flex-col lg:flex-row gap-5">
+            <div class="flex flex-col gap-5 lg:flex-row">
                 <!-- Mission Section - Left Side -->
-                <div class="lg:w-1/3">
-                    {% block mission_content %}
-
+                <div class="mb-10 flex flex-col items-center lg:items-start lg:w-1/2">
                     <div class="flex flex-wrap gap-4">
                         <div class="flex items-center space-x-2 bg-accent/10 rounded-full px-4 py-2">
                             <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -229,13 +223,13 @@
                             <span class="text-sm text-white">Innovation</span>
                         </div>
                     </div>
-                    {% endblock %}
                 </div>
+
                 <!-- Footer Links Section - Right Side -->
-                <div class="lg:w-2/3">
-                    <div class="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-8">
+                <div class="flex flex-col items-center lg:items-start lg:w-1/2">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-8">
                         <!-- Quick Links -->
-                        <div>
+                        <div class="text-center lg:text-left">
                             <h3 class="text-lg font-bold text-accent mb-4">Quick Links</h3>
                             <ul class="space-y-2 text-sm text-gray-300">
                                 <li><a href="{% url 'home_page:about' %}" class="hover:text-accent transition-colors">About Us</a></li>
@@ -243,7 +237,7 @@
                         </div>
 
                         <!-- Emergency -->
-                        <div>
+                        <div class="text-center lg:text-left">
                             <h3 class="text-lg font-bold text-accent mb-4">Emergency</h3>
                             <ul class="space-y-2 text-sm text-gray-300">
                                 <li>Emergency: 999</li>
@@ -253,7 +247,7 @@
                         </div>
 
                         <!-- Our Impact -->
-                        <div>
+                        <div class="text-center lg:text-left">
                             <h3 class="text-lg font-bold text-accent mb-4">Our Impact</h3>
                             <ul class="space-y-2 text-sm">
                                 <li class="text-gray-300">
@@ -269,11 +263,11 @@
                         </div>
 
                         <!-- Connect -->
-                        <div>
+                        <div class="text-center lg:text-left">
                             <h3 class="text-lg font-bold text-accent mb-4">Connect</h3>
-                            <div class="flex space-x-4">
+                            <div class="flex justify-center space-x-4">
                                 <a href="https://github.com/3disturbed/Protect_Multitool/blob/main/README.md" 
-                                   class="text-gray-300 hover:text-accent transition-colors">
+                                class="text-gray-300 hover:text-accent transition-colors">
                                     <span class="sr-only">GitHub</span>
                                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                                         <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
@@ -286,7 +280,7 @@
             </div>
 
             <!-- Copyright -->
-            <div class="mt-12 pt-8 border-t border-accent/20 text-center text-sm text-gray-400">
+            <div class="mt-10 pt-6 text-center text-sm text-gray-400">
                 <p>&copy; {% now "Y" %} Protect Multi-Tool. {% block footer_tagline %}Empowering safety through technology.{% endblock %}</p>
             </div>
         </div>
