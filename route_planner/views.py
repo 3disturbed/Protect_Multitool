@@ -154,7 +154,7 @@ def emergency_message(request):
 
             response = requests.post(external_url, json=external_data, headers=headers)
 
-            if response.status_code == 200:
+            if response.status_code == 202:
                 return JsonResponse({"message": "Request to external API succeeded", "response": response.json()}, status=200)
             else:
                 return JsonResponse(
