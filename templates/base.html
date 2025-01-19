@@ -83,7 +83,7 @@
                         <a href="{% url 'route_planner:planner' %}" class="text-sm font-medium hover:text-accent transition-colors">Safe Routes
                         </a>
                         <a href="{% url 'game:home' %}" class="text-sm font-medium hover:text-accent transition-colors flex items-center">
-                            <span>Game</span>
+                            <span>Games</span>
                         </a>
                         
                         <div x-data="{ open: false }" class="relative">
@@ -139,7 +139,7 @@
                         <!-- User Auth Section -->
                         {% if user.is_authenticated %}
                         <a href="{% url 'route_planner:planner' %}" class="mt-4 block text-sm font-medium hover:text-accent transition-colors">Safe Routes</a>
-                        <a href="{% url 'game:home' %}" class="mt-4 block text-sm font-medium hover:text-accent transition-colors">Game</a>
+                        <a href="{% url 'game:home' %}" class="mt-4 block text-sm font-medium hover:text-accent transition-colors">Games</a>
 
                         <div x-data="{ open: false }" class="relative">
                             <button @click="open = !open" class="mt-4 flex items-center space-x-2 text-sm font-medium hover:text-accent transition-colors">

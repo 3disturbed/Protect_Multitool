@@ -1,16 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if route %}
-    <p>Starting Location: {{ route.starting_location }}</p>
-    <p>Finishing Location: {{ route.finishing_location }}</p>
-    <p>With Who: {{ route.with_who }}</p>
-    <p>Time Limit: {{ route.time_limit }} minutes</p>
-    <p>Created At: {{ route.created_at }}</p>
-    {% if route.additional_info %}
-        <p>Additional Information: {{ route.additional_info }}</p>
-    {% endif %}
-{% else %}
-    <p>No route details available.</p>
-{% endif %}
+<!-- Header Section -->
+<div class="text-center mb-8">
+    <h1 class="mt-10 text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-2">
+        Route Details
+    </h1>
+</div>
+
+<div class="mt-2 flex items-center justify-center bg-neutral px-4">
+    <div class="w-full max-w-lg backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+        <div class="space-y-4 text-gray-300">
+        {% if route %}
+            <p class="mt-5 font-medium text-accent">Starting Location: {{ route.starting_location }}</p>
+            <p class="mt-5 font-medium text-accent">Finishing Location: {{ route.finishing_location }}</p>
+            <p class="mt-5 font-medium text-accent">With Who: {{ route.with_who }}</p>
+            <p class="mt-5 font-medium text-accent">Time Limit: {{ route.time_limit }} minutes</p>
+            <p class="mt-5 font-medium text-accent">Created At: {{ route.created_at }}</p>
+            {% if route.additional_info %}
+            <p class="mt-5 font-medium text-accent">Additional Information: {{ route.additional_info }}</p>
+            {% endif %}
+        {% else %}
+            <p class="mt-5 text-center text-gray-400">No route details available.</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
