@@ -15,6 +15,10 @@ class Profile(models.Model):
         if self.first_name and self.user.first_name != self.first_name:
             self.user.first_name = self.first_name
             self.user.save(update_fields=['first_name'])  # Avoid triggering signals unnecessarily
+
+        if self.last_name and self.user.last_name != self.last_name:
+            self.user.last_name = self.last_name
+            self.user.save(update_fields=['last_name'])
         super(Profile, self).save(*args, **kwargs)
 
 
