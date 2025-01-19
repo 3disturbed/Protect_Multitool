@@ -1,3 +1,5 @@
+import { frog } from "./frog";
+
 // Game mechanics
 export const SCROLL_SPEED = 1;
 export const SURFACE_SCROLL_SPEED = 2;
@@ -11,7 +13,7 @@ export const KICK_COOLDOWN = 10;
 
 // Sprite configurations
 export const FROG_CONFIG = {
-    imageSrc: './images/frog.png',
+    imageSrc: frogImg,
     frameWidth: 50,
     frameHeight: 50,
     frames: 2,
@@ -30,7 +32,7 @@ export const FROG_CONFIG = {
 };
 
 export const FLOOR_SPRITE_CONFIG = {
-    imageSrc: './images/floor.png',
+    imageSrc: floorImg,
     frameWidth: 32,
     frameHeight: 32,
     frames: 1,
