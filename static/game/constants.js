@@ -1,4 +1,4 @@
-import { frog } from "./frog";
+
 
 // Game mechanics
 export const SCROLL_SPEED = 1;
