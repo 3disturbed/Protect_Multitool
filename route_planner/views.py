@@ -16,6 +16,14 @@ def home(request):
 
 @login_required
 def planner(request):
+
+    print(f"Current user: {request.user.username}")
+
+    contacts = EmergencyContact.objects.filter(user=request.user)
+    print(f"Number of contacts found: {contacts.count()}")
+    for contact in contacts:
+        print(f"Found contact: {contact.name}, {contact.phone}")
+
     if request.method == 'POST':
         form = PlannedRouteForm(request.POST)
         if form.is_valid():
@@ -27,7 +35,14 @@ def planner(request):
     else:
         form = PlannedRouteForm()
 
-    return render(request, 'route_planner/planner.html', {'form': form})
+    context = {
+        'form': form,
+        'contacts' : contacts,
+    }
+
+    print(f"Context contacts count: {contacts.count()}")
+
+    return render(request, 'route_planner/planner.html', context)
 
 
 @login_required
@@ -166,3 +181,5 @@ def emergency_message(request):
             return JsonResponse({"error": "An unexpected error occurred", "details": str(e)}, status=500)
 
     return JsonResponse({"error": "Invalid request method. Only POST is allowed."}, status=400)
+
+

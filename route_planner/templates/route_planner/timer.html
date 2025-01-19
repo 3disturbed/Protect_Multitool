@@ -1,26 +1,102 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                Journey Timer
+            </h1>
+            <p class="text-gray-400 mt-2">
+                Stay safe! Enter your PIN to confirm your arrival
+            </p>
+        </div>
 
-<h2 class="timer"></h2>
-<form id="pin-form">
-    <label for="pin">Pin</label>
-    <input type="text" id="pin" name="pin"><br><br>
-    <input type="submit" value="Submit">
-</form>
+        <!-- Timer Card -->
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-8 shadow-xl border border-accent/10 mb-6">
+            <!-- Visual Timer -->
+            <div class="relative w-48 h-48 mx-auto mb-6">
+                <!-- SVG Circle Timer -->
+                <svg class="w-full h-full transform -rotate-90">
+                    <circle 
+                        cx="96" 
+                        cy="96" 
+                        r="88" 
+                        class="stroke-current text-neutral-dark"
+                        stroke-width="12"
+                        fill="none"
+                    />
+                    <circle 
+                        id="timerCircle"
+                        cx="96" 
+                        cy="96" 
+                        r="88"
+                        class="stroke-current text-accent"
+                        stroke-width="12"
+                        fill="none"
+                        stroke-dasharray="552.92"
+                        stroke-dashoffset="0"
+                    />
+                </svg>
+                <!-- Digital Timer Display -->
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                    <div class="timer text-4xl font-bold text-white"></div>
+                    <div class="text-sm text-gray-400 mt-1">remaining</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN Entry Card -->
+        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+            <form id="pin-form" class="space-y-4">
+                <div>
+                    <label for="pin" class="block text-sm font-medium text-gray-300 mb-2">
+                        Enter Safety PIN
+                    </label>
+                    <input type="text" 
+                           id="pin" 
+                           name="pin" 
+                           class="appearance-none block w-full px-4 py-3 rounded-xl bg-neutral-dark border border-accent/10 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent placeholder-gray-500 text-white"
+                           placeholder="Enter your PIN to confirm arrival"
+                           maxlength="10">
+                </div>
+                <div class="flex justify-end">
+                    <button type="submit"
+                            class="px-6 py-2 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
+                        Verify PIN
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Emergency Contacts Info -->
+        <div class="mt-6">
+            <div class="text-center">
+                <p class="text-sm text-gray-400">
+                    Your emergency contacts will be notified if you don't check in before the timer ends.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    const routeId = `{{ id }}`
+    const routeId = `{{ id }}`;
     let contact_name = '';
     let phone_number = '';
-    const first_name = "{{first_name}}"
+    const first_name = "{{first_name}}";
+
     document.addEventListener('DOMContentLoaded', function () {
-        const pinForm = document.querySelector('#pin-form')
-        console.log(`Route ID: ${routeId}`);
+        const pinForm = document.querySelector('#pin-form');
+        const timerCircle = document.getElementById('timerCircle');
+        const circumference = 2 * Math.PI * 88; // r = 88
         let timerInterval;
+
+        // PIN form submission
         pinForm.addEventListener('submit', function (event) {
             event.preventDefault();
-
-            const pinInput = document.getElementById('pin').value
+            const pinInput = document.getElementById('pin').value;
 
             fetch(`{% url 'route_planner:verify_pin' %}`, {
                 method: 'POST',
@@ -30,110 +106,117 @@
                     pin: pinInput
                 }),
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.valid) {
-                        stopCountdown()
-                        console.log('Correct pin, will stop countdown')
-                    } else {
-                        console.log('Incorrect Pin');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        })
-        console.log(routeId)
-    })
-    const initialTime = parseInt('{{ timer|safe }}', 10); // Parse as integer
-    console.log(`Initial time: ${initialTime} minutes`);
+            .then(response => response.json())
+            .then(data => {
+                if (data.valid) {
+                    stopCountdown();
+                    showSuccess();
+                } else {
+                    showError();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
 
-    const storedRouteId = localStorage.getItem('currentRouteId');
-    let remainingSeconds = localStorage.getItem('remainingSeconds');
-    // Retrieve the remaining time from localStorage
-    if (storedRouteId !== routeId) {
-        console.log("New route detected. Resetting timer.");
-        // New route: reset timer and update Local Storage
-        remainingSeconds = initialTime * 60; // Convert minutes to seconds
-        localStorage.setItem('remainingSeconds', remainingSeconds);
-        localStorage.setItem('currentRouteId', routeId); // Update route ID in Local Storage
-    }
+        // Timer initialization
+        const initialTime = parseInt('{{ timer|safe }}', 10);
+        const storedRouteId = localStorage.getItem('currentRouteId');
+        let remainingSeconds = localStorage.getItem('remainingSeconds');
 
-    function startCountdown() {
-        timerInterval = setInterval(() => {
-            // Retrieve the remaining time from localStorage
-            let seconds = parseInt(localStorage.getItem('remainingSeconds'), 10);
-
-            // Calculate minutes and seconds
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-
-            // Format time as MM:SS
-            const formattedTime = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-
-            // Update the timer div
-            let timerDiv = document.querySelector('.timer');
-            if (timerDiv) {
-                timerDiv.textContent = formattedTime;  // Display time
-            }
-
-            // Stop the timer when it reaches 0
-            if (seconds <= 0) {
-                clearInterval(timerInterval);
-                console.log("Time's up!");
-                localStorage.removeItem('remainingSeconds'); // Clear storage
-                let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|safe }}');
-
-
-
-                    //For loop within event listener to count the contacts and make individual request for each
-                    for (let i = 0; i < emergency_contacts_list.length; i++) {
-                        contact_name = emergency_contacts_list[i].name;
-                        phone_number = emergency_contacts_list[i].phone_number;
-                        console.log(`Name: ${contact_name}, Number: ${phone_number}`);
-                        console.log("Button clicked!");
-                        // API request to send on loop for each contact
-                        fetch(`{% url 'route_planner:emergency_message' %}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                recipient: phone_number,
-                                sender: first_name,
-                                contact: contact_name,
-                                id: routeId,
-                            }),
-                        })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error(`HTTP error! status: ${response.status}`);
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                console.log('Response:', data);
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
-                    };
-            } else {
-                // Decrement and update the remaining time in localStorage
-                seconds--;
-                localStorage.setItem('remainingSeconds', seconds);
-            }
-        }, 1000); // Run every 1 second
-    }
-
-    //Function to stop the countdown when a correct pin is entered
-    function stopCountdown() {
-        if (timerInterval) {
-            clearInterval(timerInterval);
-            console.log("Countdown stopped!");
+        if (storedRouteId !== routeId) {
+            remainingSeconds = initialTime * 60;
+            localStorage.setItem('remainingSeconds', remainingSeconds);
+            localStorage.setItem('currentRouteId', routeId);
         }
-    }
-    // Start the countdown
-    startCountdown();
+
+        function updateTimerVisual(secondsLeft, totalSeconds) {
+            const percentage = secondsLeft / totalSeconds;
+            const dashoffset = circumference * (1 - percentage);
+            timerCircle.style.strokeDasharray = circumference;
+            timerCircle.style.strokeDashoffset = dashoffset;
+        }
+
+        function startCountdown() {
+            const totalSeconds = initialTime * 60;
+            timerInterval = setInterval(() => {
+                let seconds = parseInt(localStorage.getItem('remainingSeconds'), 10);
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                const formattedTime = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+                // Update timer display
+                let timerDiv = document.querySelector('.timer');
+                if (timerDiv) {
+                    timerDiv.textContent = formattedTime;
+                }
+
+                // Update visual circle
+                updateTimerVisual(seconds, totalSeconds);
+
+                if (seconds <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeout();
+                } else {
+                    seconds--;
+                    localStorage.setItem('remainingSeconds', seconds);
+                }
+            }, 1000);
+        }
+
+        function stopCountdown() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                localStorage.removeItem('remainingSeconds');
+            }
+        }
+
+        function showSuccess() {
+            // Add success notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 max-w-md w-full bg-green-500/20 border border-green-500/20 text-green-400 p-4 rounded-xl shadow-lg z-[60]';
+            notification.textContent = 'PIN verified successfully! Journey completed safely.';
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 5000);
+        }
+
+        function showError() {
+            // Add error notification
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-24 left-1/2 transform -translate-x-1/2 max-w-md bg-red-500/20 border border-red-500/20 text-red-400 p-4 rounded-xl shadow-lg z-[60]';
+            notification.textContent = 'Incorrect PIN. Please try again.';
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 5000);
+        }
+
+        function handleTimeout() {
+            let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|safe }}');
+            for (let i = 0; i < emergency_contacts_list.length; i++) {
+                contact_name = emergency_contacts_list[i].name;
+                phone_number = emergency_contacts_list[i].phone_number;
+                
+                fetch(`{% url 'route_planner:emergency_message' %}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        recipient: phone_number,
+                        sender: first_name,
+                        contact: contact_name,
+                        id: routeId,
+                    }),
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.json();
+                })
+                .then(data => console.log('Response:', data))
+                .catch(error => console.error('Error:', error));
+            }
+        }
+
+        // Start the countdown
+        startCountdown();
+    });
 </script>
-
-
 {% endblock %}
