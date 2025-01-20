@@ -1,53 +1,103 @@
+{# accounts/templates/accounts/profile_form.html #}
 {% extends "base.html" %}
 
+{% block title %}Create Profile - Protect Multi-Tool{% endblock %}
+
 {% block content %}
-<main class="flex-grow container mx-auto px-4 pt-20 mt-10 pb-12">
+<div class="container mx-auto px-6 py-12">
+    <div class="max-w-2xl mx-auto">
+        <!-- Form Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-4">Complete Your Profile</h1>
+            <p class="text-gray-300">Please provide your details to help us better protect you.</p>
+        </div>
 
-    <div class="max-w-md mx-auto bg-gray-800 shadow-md rounded-lg p-6">
-        <h1 class="text-2xl font-bold text-pink-500 text-center mb-6">Create Your Profile</h1>
-        <form method="post" class="space-y-4">
-            {% csrf_token %}
-            
-            <!-- Phone Number Field -->
-            <div class="space-y-2">
-                <label for="{{ form.phone_number.id_for_label }}" class="text-white font-semibold">
-                    {{ form.phone_number.label }}
-                </label>
-                <input type="text" name="{{ form.phone_number.name }}" id="{{ form.phone_number.id_for_label }}" 
-                       class="w-full bg-gray-200 text-gray-800 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500" 
-                       value="{{ form.phone_number.value|default_if_none:'' }}">
-            </div>
-            
-            <!-- First Name Field -->
-            <div class="space-y-2">
-                <label for="{{ form.first_name.id_for_label }}" class="text-white font-semibold">
-                    {{ form.first_name.label }}
-                </label>
-                <input type="text" name="{{ form.first_name.name }}" id="{{ form.first_name.id_for_label }}" 
-                       class="w-full bg-gray-200 text-gray-800 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500" 
-                       value="{{ form.first_name.value|default_if_none:'' }}">
-            </div>
-            
-            <!-- Last Name Field -->
-            <div class="space-y-2">
-                <label for="{{ form.last_name.id_for_label }}" class="text-white font-semibold">
-                    {{ form.last_name.label }}
-                </label>
-                <input type="text" name="{{ form.last_name.name }}" id="{{ form.last_name.id_for_label }}" 
-                       class="w-full bg-gray-200 text-gray-800 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-500" 
-                       value="{{ form.last_name.value|default_if_none:'' }}">
-            </div>
+        <!-- Form Card -->
+        <div class="relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-accent/10 to-secondary/10 rounded-3xl blur-xl"></div>
+            <div class="relative backdrop-blur-md bg-neutral-light/30 rounded-3xl p-8 border border-accent/10">
+                <form method="POST" class="space-y-6">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                    <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 mb-6">
+                        {{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
 
-            <!-- Submit Button -->
-            <button type="submit" class="w-full bg-pink-500 text-white font-semibold py-2 rounded-md hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500">
-                Save Profile
-            </button>
-        </form>
+                    <!-- First Name Field -->
+                    <div>
+                        <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
+                            First Name
+                            <span class="text-accent">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" 
+                                   name="{{ form.first_name.name }}"
+                                   id="{{ form.first_name.id_for_label }}"
+                                   class="appearance-none block w-full px-4 py-3 rounded-xl bg-neutral-dark border {% if form.first_name.errors %}border-red-500{% else %}border-accent/10{% endif %} focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent placeholder-gray-500 text-white"
+                                   placeholder="Enter your first name"
+                                   required>
+                            {% if form.first_name.errors %}
+                            <div class="text-red-400 text-sm mt-1">{{ form.first_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Last Name Field -->
+                    <div>
+                        <label for="{{ form.last_name.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
+                            Last Name
+                            <span class="text-accent">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" 
+                                   name="{{ form.last_name.name }}"
+                                   id="{{ form.last_name.id_for_label }}"
+                                   class="appearance-none block w-full px-4 py-3 rounded-xl bg-neutral-dark border {% if form.last_name.errors %}border-red-500{% else %}border-accent/10{% endif %} focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent placeholder-gray-500 text-white"
+                                   placeholder="Enter your last name"
+                                   required>
+                            {% if form.last_name.errors %}
+                            <div class="text-red-400 text-sm mt-1">{{ form.last_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Phone Number Field -->
+                    <div>
+                        <label for="{{ form.phone_number.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
+                            Phone Number
+                            <span class="text-accent">*</span>
+                        </label>
+                        <div class="relative">
+                            <input type="tel" 
+                                   name="{{ form.phone_number.name }}"
+                                   id="{{ form.phone_number.id_for_label }}"
+                                   class="appearance-none block w-full px-4 py-3 rounded-xl bg-neutral-dark border {% if form.phone_number.errors %}border-red-500{% else %}border-accent/10{% endif %} focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent placeholder-gray-500 text-white"
+                                   placeholder="Enter your phone number"
+                                   required>
+                            {% if form.phone_number.errors %}
+                            <div class="text-red-400 text-sm mt-1">{{ form.phone_number.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end space-x-4">
+                        <button type="submit" 
+                                class="px-6 py-3 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
+                            Save Profile
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Help Text -->
+        <div class="mt-8 text-center text-sm text-gray-400">
+            <p>All fields marked with <span class="text-accent">*</span> are required.</p>
+            <p class="mt-2">Your information is securely stored and only used for emergency purposes.</p>
+        </div>
     </div>
-
-</main>
+</div>
 {% endblock %}
-
-
-
-
