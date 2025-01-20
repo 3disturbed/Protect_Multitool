@@ -58,14 +58,14 @@
             </button>
         {% else %}
             <a href="{% url 'account_home:add_emergency_contact' %}"
-                class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+                class="mt-6 w-full px-4 py-10 font-medium bg-amber-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
                 ADD CONTACTS
             </a>
         {% endif %}
     {% else %}
         <a href="{% url 'account_signup' %}"
-            class="mt-6 w-full px-4 py-10 font-medium bg-red-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
-            Sign Up
+            class="mt-6 w-full px-4 py-10 font-medium bg-green-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+            Sign Up / Log In
         </a>
     {% endif %}
 </div>

@@ -3,156 +3,167 @@
 {% block title %}Safe Route Planner - Ctrl+Alt+Escape{% endblock %}
 
 {% block content %}
-    <!-- Header Section -->
-    <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-2">
-            Plan Your Safe Journey
-        </h1>
-        <p class="text-gray-400">Share your route details with trusted contacts</p>
-    </div>
+<!-- Header Section -->
+<div class="text-center mb-8">
+    <h1 class="text-3xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent mb-2">
+        Plan Your Safe Journey
+    </h1>
+    <p class="text-gray-400">Share your route details with trusted contacts</p>
+</div>
 
-    <!-- Main Form Card -->
-    <div class="max-w-2xl mx-auto">
-        <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
-            <form method="post" class="space-y-6">
-                {% csrf_token %}
-                
-                <!-- Starting Location -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">
-                        Starting Location
-                    </label>
-                    <div class="relative">
-                        {{ form.starting_location }}
-                        <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    {% if form.starting_location.errors %}
-                        <p class="mt-1 text-sm text-red-400">{{ form.starting_location.errors.0 }}</p>
-                    {% endif %}
-                </div>
+{% if emergency_contacts_check %}
+<!-- Main Form Card -->
+<div class="max-w-2xl mx-auto">
+    <div class="backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
 
-                <!-- Destination -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">
-                        Destination
-                    </label>
-                    <div class="relative">
-                        {{ form.finishing_location }}
-                        <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    {% if form.finishing_location.errors %}
-                        <p class="mt-1 text-sm text-red-400">{{ form.finishing_location.errors.0 }}</p>
-                    {% endif %}
-                </div>
-
-                <!-- Companions -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">
-                        Who are you with?
-                    </label>
-                    {{ form.with_who }}
-                    {% if form.with_who.errors %}
-                        <p class="mt-1 text-sm text-red-400">{{ form.with_who.errors.0 }}</p>
-                    {% endif %}
-                </div>
-
-                <!-- Time Settings -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">
-                            Time Limit (minutes)
-                        </label>
-                        {{ form.time_limit }}
-                        {% if form.time_limit.errors %}
-                            <p class="mt-1 text-sm text-red-400">{{ form.time_limit.errors.0 }}</p>
-                        {% endif %}
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1">
-                            Safety PIN
-                        </label>
-                        {{ form.pin_code }}
-                        {% if form.pin_code.errors %}
-                            <p class="mt-1 text-sm text-red-400">{{ form.pin_code.errors.0 }}</p>
-                        {% endif %}
+            <!-- Starting Location -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">
+                    Starting Location
+                </label>
+                <div class="relative">
+                    {{ form.starting_location }}
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
                     </div>
                 </div>
-
-                <!-- Additional Information -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-1">
-                        Additional Information
-                    </label>
-                    {{ form.additional_info }}
-                    {% if form.additional_info.errors %}
-                        <p class="mt-1 text-sm text-red-400">{{ form.additional_info.errors.0 }}</p>
-                    {% endif %}
-                </div>
-
-                <!-- Emergency Contacts Preview -->
-                {% if contacts.exists %}
-                    <div class="bg-neutral-dark/50 rounded-xl p-4 border border-accent/10">
-                        <div class="flex items-center justify-between mb-3">
-                            <h3 class="text-sm font-medium text-gray-300">Emergency Contacts</h3>
-                            <span class="px-2 py-1 text-xs rounded-full bg-accent/20 text-accent">
-                                {{ contacts.count }} Selected
-                            </span>
-                        </div>
-                        <div class="space-y-2">
-                            {% for contact in contacts %}
-                                <div class="flex items-center justify-between text-sm backdrop-blur-md bg-neutral-light/30 rounded-lg p-3">
-                                    <div class="space-y-1">
-                                        <span class="text-gray-300">{{ contact.name }}</span>
-                                        <p class="text-xs text-gray-400">{{ contact.relationship }}</p>
-                                    </div>
-                                    <span class="text-accent">{{ contact.phone }}</span>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% else %}
-                    <div class="bg-neutral-dark/50 rounded-xl p-4 border border-accent/10">
-                        <div class="flex flex-col items-center justify-center text-center">
-                            <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                            </svg>
-                            <p class="text-sm text-gray-400 mb-3">No emergency contacts added yet</p>
-                            <a href="{% url 'account_home:add_emergency_contact' %}" 
-                            class="w-full px-4 py-2 bg-secondary/20 hover:bg-secondary/30 text-white text-sm font-medium rounded-lg transition-colors text-center">
-                                Add Emergency Contacts
-                            </a>
-                        </div>
-                    </div>
+                {% if form.starting_location.errors %}
+                <p class="mt-1 text-sm text-red-400">{{ form.starting_location.errors.0 }}</p>
                 {% endif %}
+            </div>
 
-                <!-- Submit Button -->
-                <div class="pt-4">
-                    <button type="submit" 
-                            class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
-                        Start Journey Tracking
-                    </button>
+            <!-- Destination -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">
+                    Destination
+                </label>
+                <div class="relative">
+                    {{ form.finishing_location }}
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
                 </div>
-            </form>
-        </div>
+                {% if form.finishing_location.errors %}
+                <p class="mt-1 text-sm text-red-400">{{ form.finishing_location.errors.0 }}</p>
+                {% endif %}
+            </div>
 
-        <!-- Safety Tips -->
-        <div class="mt-8 text-center">
-            <p class="text-sm text-gray-400">
-                Remember: Your safety PIN will be required to confirm your arrival.
-                <br>
-                Emergency contacts will be notified if you don't check in within the time limit.
-            </p>
-        </div>
+            <!-- Companions -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">
+                    Who are you with?
+                </label>
+                {{ form.with_who }}
+                {% if form.with_who.errors %}
+                <p class="mt-1 text-sm text-red-400">{{ form.with_who.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Time Settings -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                        Time Limit (minutes)
+                    </label>
+                    {{ form.time_limit }}
+                    {% if form.time_limit.errors %}
+                    <p class="mt-1 text-sm text-red-400">{{ form.time_limit.errors.0 }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-1">
+                        Safety PIN
+                    </label>
+                    {{ form.pin_code }}
+                    {% if form.pin_code.errors %}
+                    <p class="mt-1 text-sm text-red-400">{{ form.pin_code.errors.0 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-1">
+                    Additional Information
+                </label>
+                {{ form.additional_info }}
+                {% if form.additional_info.errors %}
+                <p class="mt-1 text-sm text-red-400">{{ form.additional_info.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Emergency Contacts Preview -->
+            {% if contacts.exists %}
+            <div class="bg-neutral-dark/50 rounded-xl p-4 border border-accent/10">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-medium text-gray-300">Emergency Contacts</h3>
+                    <span class="px-2 py-1 text-xs rounded-full bg-accent/20 text-accent">
+                        {{ contacts.count }} Selected
+                    </span>
+                </div>
+                <div class="space-y-2">
+                    {% for contact in contacts %}
+                    <div
+                        class="flex items-center justify-between text-sm backdrop-blur-md bg-neutral-light/30 rounded-lg p-3">
+                        <div class="space-y-1">
+                            <span class="text-gray-300">{{ contact.name }}</span>
+                            <p class="text-xs text-gray-400">{{ contact.relationship }}</p>
+                        </div>
+                        <span class="text-accent">{{ contact.phone }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div class="bg-neutral-dark/50 rounded-xl p-4 border border-accent/10">
+                <div class="flex flex-col items-center justify-center text-center">
+                    <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <p class="text-sm text-gray-400 mb-3">No emergency contacts added yet</p>
+                    <a href="{% url 'account_home:add_emergency_contact' %}"
+                        class="w-full px-4 py-2 bg-secondary/20 hover:bg-secondary/30 text-white text-sm font-medium rounded-lg transition-colors text-center">
+                        Add Emergency Contacts
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Submit Button -->
+            <div class="pt-4">
+                <button type="submit"
+                    class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
+                    Start Journey Tracking
+                </button>
+            </div>
+        </form>
     </div>
+    {% else %}
+    <a href="{% url 'account_home:add_emergency_contact' %}"
+        class="mt-10 w-full px-4 py-10 font-medium bg-amber-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+        Please add emergency contacts to use this feature
+    </a>
+    {% endif %}
+    <!-- Safety Tips -->
+    <div class="mt-8 text-center">
+        <p class="text-sm text-gray-400">
+            Remember: Your safety PIN will be required to confirm your arrival.
+            <br>
+            Emergency contacts will be notified if you don't check in within the time limit.
+        </p>
+    </div>
+</div>
 {% endblock %}

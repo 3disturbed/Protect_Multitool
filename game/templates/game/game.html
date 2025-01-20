@@ -3,6 +3,8 @@
 {% block content %}
 {% load static %}
 
+{% if user.is_authenticated %}
+{% if emergency_contacts_check %}
 <canvas id="gameCanvas" width="720" height="1280"></canvas>
 <button id="playButton">Full Screen</button>
 <br>
@@ -28,17 +30,24 @@
         console.log("Geolocation updated:", window.gameConfig.latitude, window.gameConfig.longitude);
     });
 </script>
+{% else %}
+<a href="{% url 'account_home:add_emergency_contact' %}"
+    class="mt-20 w-full px-4 py-10 font-medium bg-amber-500 text-2xl text-white rounded-xl hover:bg-opacity-80 transition-all transform hover:scale-105 shadow-lg text-center block">
+    Please add emergency contacts to use this feature
+</a>
+{% endif %}
+{% endif %}
 <script type="module" src="{% static 'game/game.js' %}"></script>
 
-<script >
+<script>
     const floorImg = "{% static './game/images/floor.png' %}";
     const frogImg = "{% static 'game/images/frog.png' %}";
     const plantImg = "{% static 'game/images/plant.png' %}";
     const rockImg = "{% static 'game/images/rock.png' %}";
-    const surfaceImg ="{% static 'game/images/surface.png' %}";
+    const surfaceImg = "{% static 'game/images/surface.png' %}";
     const wallImg = "{% static 'game/images/wall.png' %}";
-    
-    
+
+
 </script>
 
 

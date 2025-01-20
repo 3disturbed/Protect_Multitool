@@ -25,9 +25,12 @@ def simple_game_view(request):
             print (emergency_contacts_list)
     else:
         print('No emergency contacts to display')
+
+    emergency_contacts_check = emergency_contacts_list
     emergency_contacts_json = json.dumps(emergency_contacts_list)
     print(emergency_contacts_json)
     context = {
+        'emergency_contacts_check': emergency_contacts_check,
         'emergency_contacts_list': emergency_contacts_json,
         'first_name': first_name,
     }
