@@ -60,10 +60,14 @@ def about(request):
 def profile_handler(request):
     # Check if the profile exists
     profile = Profile.objects.filter(user=request.user).first()
+    contacts = EmergencyContact.objects.filter(user=request.user)
 
     if profile:
         # If the profile exists, render the profile detail page
-        return render(request, 'home_page/profile_detail.html', {'profile': profile})
+         return render(request, 'home_page/profile_detail.html', {
+            'profile': profile,
+            'contacts': contacts,
+        })
     else:
         # If no profile exists, redirect to the profile creation page
         return redirect('home_page:profile_create')
