@@ -27,10 +27,13 @@ let decorations = [];
 let walls = [];
 let frameCount = 0;
 
+console.log('Game started');   
 const floorSprite = new Sprite({ ...FLOOR_SPRITE_CONFIG, x: 0, y: 0 });
+console.log(" Loaded floor sprite");
 const surfaceSprite = new Sprite({ imageSrc: surfaceImg, frameWidth: 32, frameHeight: 32, frames: 1, frameDelay: 100, scaleFactor: 3, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 32, height : 32, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
+console.log(" Loaded surface sprite");
 const wallSprite = new Sprite({ 
-    imageSrc: wallImg,  // Fixed 'mageSrc' to 'imageSrc'
+    imageSrc: wallImg,
     frameWidth: 16, 
     frameHeight: 16, 
     frames: 1, 
@@ -49,12 +52,13 @@ const wallSprite = new Sprite({
     alive: true, 
     GullDistance: 0 
 });
+console.log(" Loaded wall sprite");
 const plantSprite = new Sprite({ 
     imageSrc: plantImg, 
     frameWidth: 64, 
     frameHeight: 64, 
-    frames: 2,  // Changed from 1 to 2 frames
-    frameDelay: 1500, // Added longer delay for plant animation
+    frames: 2,  
+    frameDelay: 1500,
     scaleFactor: 1.9, 
     opacity: 1, 
     rotation: 0, 
@@ -69,8 +73,9 @@ const plantSprite = new Sprite({
     alive: true, 
     GullDistance: 0 
 });
+console.log(" Loaded plant sprite");
 const rockSprite = new Sprite({ imageSrc: rockImg, frameWidth: 64, frameHeight: 64, frames: 1, frameDelay: 100, scaleFactor: 2, opacity: 1, rotation: 0, yFrame: 0, x: 0, y: 0, width: 64, height: 64, velocity: 0, boyancy: 0, jump: 0, alive: true, GullDistance: 0 });
-
+console.log(" Loaded rock sprite");
 const canvas = document.getElementById('gameCanvas');
 const context = canvas.getContext('2d');
 

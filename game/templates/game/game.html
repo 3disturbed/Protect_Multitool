@@ -12,13 +12,14 @@
 <script type="module" src="{% static 'game/sprite.js' %}"></script>
 <script type="module" src="{% static 'game/frog.js' %}"></script>
 <script type="module" src="{% static 'game/game.js' %}"></script>
+
 <script >
-    const floorImg = new Image("{% static 'game/floor.png' %}");
-    const frogImg = new Image("{% static 'game/frog.png' %}");
-    const plantImg = new Image("{% static 'game/plant.png' %}");
-    const rockImg = new Image("{% static 'game/rock.png' %}");
-    const surfaceImg = new Image("{% static 'game/surface.png' %}");
-    const wallImg = new Image("{% static 'game/wall.png' %}");
+    const floorImg = "{% static './game/images/floor.png' %}";
+    const frogImg = "{% static 'game/images/frog.png' %}";
+    const plantImg = "{% static 'game/images/plant.png' %}";
+    const rockImg = "{% static 'game/images/rock.png' %}";
+    const surfaceImg ="{% static 'game/images/surface.png' %}";
+    const wallImg = "{% static 'game/images/wall.png' %}";
     
     
 </script>

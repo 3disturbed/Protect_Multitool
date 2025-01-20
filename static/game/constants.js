@@ -13,7 +13,7 @@ export const KICK_COOLDOWN = 10;
 
 // Sprite configurations
 export const FROG_CONFIG = {
-    imageSrc: frogImg,
+    imageSrc:frogImg,
     frameWidth: 50,
     frameHeight: 50,
     frames: 2,

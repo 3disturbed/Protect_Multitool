@@ -4,9 +4,10 @@ export default class Sprite {
         this.image = new Image();
         this.loaded = false;
         this.image.onload = () => {
-            this.loaded = true;
+            this.loaded = true;        
+            console.log("IMG = " + imageSrc);
         };
-        console.log(imageSrc);
+
         this.image.src = imageSrc;
         this.frameWidth = frameWidth;
         this.frameHeight = frameHeight;
