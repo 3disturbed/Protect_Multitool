@@ -474,17 +474,89 @@ function gameOver() {
 }
 
 function MainAlarm() {
-    fetch('/alarm1/')
-        .then(response => response.json())
-        alert("Alarm 1")
+    const { latitude, longitude, emergencyContacts, firstName, apiUrls } = window.gameConfig;
+
+    emergencyContacts.forEach(contact => {
+        const { name: contactName, phone_number: phoneNumber } = contact;
+
+        const url = latitude && longitude ? apiUrls.coordinatesUrl : apiUrls.fallbackUrl;
+        const payload = {
+            recipient: phoneNumber,
+            sender: firstName,
+            contact: contactName,
+        };
+
+        // Include latitude and longitude only if they are available
+        if (latitude && longitude) {
+            payload.latitude_info = latitude;
+            payload.longitude_info = longitude;
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Alarm 1 response:', data);
+        })
+        .catch(error => {
+            console.error('Error during MainAlarm fetch:', error);
+        });
+    });
+
+    alert("Help is on the way");
 }
 
 function SecondaryAlarm() {
-    fetch('/alarm2/')
-        .then(response => response.json())
-        alert("Alarm 2")
-}
+    const { latitude, longitude, emergencyContacts, firstName, apiUrls } = window.gameConfig;
 
+    emergencyContacts.forEach(contact => {
+        const { name: contactName, phone_number: phoneNumber } = contact;
+
+        const url = latitude && longitude ? apiUrls.coordinatesUrl : apiUrls.fallbackUrl;
+        const payload = {
+            recipient: phoneNumber,
+            sender: firstName,
+            contact: contactName,
+        };
+
+        if (latitude && longitude) {
+            payload.latitude_info = latitude;
+            payload.longitude_info = longitude;
+        }
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Alarm 2 response:', data);
+        })
+        .catch(error => {
+            console.error('Error during SecondaryAlarm fetch:', error);
+        });
+    });
+
+    alert("Help is on the way");
+}
 
 // Start game loop
 gameLoop();

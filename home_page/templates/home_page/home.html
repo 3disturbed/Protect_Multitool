@@ -156,7 +156,6 @@
     // Confirm action
     if (confirmBtn) {
         confirmBtn.addEventListener('click', () => {
-            alert('Emergency alert has been sent!');
             // For loop within event listener to count the contacts and make individual request for each
             for (let i = 0; i < emergency_contacts_list.length; i++) {
                 contact_name = emergency_contacts_list[i].name;
@@ -215,6 +214,7 @@
                         });
                 }
             }
+            alert('Emergency alert has been sent!');
             closeModal();
         });
     }

@@ -2,15 +2,32 @@
 
 {% block content %}
 {% load static %}
-<h2> Secret game </h2>
-<button id="sendRequest">Send POST Request</button>
-
 
 <canvas id="gameCanvas" width="720" height="1280"></canvas>
 <button id="playButton">Full Screen</button>
+<br>
+<br>
 <script type="module" src="{% static 'game/constants.js' %}"></script>
 <script type="module" src="{% static 'game/sprite.js' %}"></script>
 <script type="module" src="{% static 'game/frog.js' %}"></script>
+<script>
+    window.gameConfig = {
+        latitude: '',
+        longitude: '',
+        emergencyContacts: JSON.parse('{{ emergency_contacts_list|safe }}'),
+        firstName: "{{ first_name }}",
+        apiUrls: {
+            coordinatesUrl: "{% url 'game:handle_event_coordinates' %}",
+            fallbackUrl: "{% url 'game:handle_event' %}",
+        },
+    };
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        window.gameConfig.latitude = position.coords.latitude;
+        window.gameConfig.longitude = position.coords.longitude;
+        console.log("Geolocation updated:", window.gameConfig.latitude, window.gameConfig.longitude);
+    });
+</script>
 <script type="module" src="{% static 'game/game.js' %}"></script>
 
 <script >
@@ -23,83 +40,7 @@
     
     
 </script>
-<script>
-    
-    let latitude = '';
-    let longitude = '';
-    navigator.geolocation.getCurrentPosition((position) => {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-        return latitude, longitude;
-    });
 
-    console.log(latitude, longitude);
-    let emergency_contacts_list = JSON.parse('{{ emergency_contacts_list|safe }}');
-    let contact_name = '';
-    let phone_number = '';
-    const first_name = "{{first_name}}";
-
-    document.getElementById('sendRequest').addEventListener('click', () => {
-        // For loop within event listener to count the contacts and make individual request for each
-        for (let i = 0; i < emergency_contacts_list.length; i++) {
-            contact_name = emergency_contacts_list[i].name; 
-            phone_number = emergency_contacts_list[i].phone_number; 
-            console.log(`Name: ${contact_name}, Number: ${phone_number}`);
-            console.log("Button clicked!");
-            if (latitude && longitude) {
-                fetch(`{% url 'game:handle_event_coordinates' %}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        recipient: phone_number,
-                        sender: first_name,
-                        contact: contact_name,
-                        latitude_info: latitude,
-                        longitude_info: longitude
-                    }),
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Response:', data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            } else {
-                fetch(`{% url 'game:handle_event' %}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                        recipient: phone_number,
-                        sender: first_name,
-                        contact: contact_name,
-                    }),
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Response:', data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        }
-    });
-</script>
 
 
 

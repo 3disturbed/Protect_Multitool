@@ -70,7 +70,7 @@ The goal is to create a seamless and intuitive user experience that ensures easy
    - Once triggered using a hidden feature like a game, this event will trigger an automated message to be sent via WhatsApp to the user's set emergency contacts.
    - Emergency contacts will be set via the user's account, using PostgreSQL and Django all auth.
    - Messaging will be sent using MessageBird API.
-   - Message will be sent via WhatsApp and be very generic as it's for testing purposes - WhatsApp requires official business proof for specific message types which we won't have at the time of creation.
+   - Message will be sent via WhatsApp and is currently generic for testing purposes. Messages include user name, contact name, location (if user allows us to access their location) and in specific cases a URL and Secret key for accessing user routes.
 
 [Back to Contents](#contents)
 
@@ -233,13 +233,11 @@ To set up the project locally, follow these steps:
 
 ### Mick
 
-#### Notes
-- Tasks:
-  - Complete README additions.
-  - Submit the initial pull request.
-- Notes:
-  - Contact Ben or Dark for assistance if needed.
+-Back-end Engineer
+-MessageBird/WhatsApp wizard
 
+https://github.com/Mickjitsu
+https://www.linkedin.com/in/michael-m-881b5194
 [Back to Contents](#contents)
 
 ### Mus
