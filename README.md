@@ -233,11 +233,17 @@ To set up the project locally, follow these steps:
 
 ### Mick
 
+[GitHub](https://github.com/Mickjitsu)
+
+[LinkedIn](https://www.linkedin.com/in/michael-m-881b5194)
+
+I'm a 27 year old half digital nomad constantly moving between Ireland, Holland and Spain with a military background before working in Tech Support and studying coding from last year with Code Institute.
+The experience was awesome, I learnt a lot about working on a project that is backend heavy and had a lot of fun getting creative and implementing solutions.
 -Back-end Engineer
 -MessageBird/WhatsApp wizard
 
-https://github.com/Mickjitsu
-https://www.linkedin.com/in/michael-m-881b5194
+
+
 [Back to Contents](#contents)
 
 ### Mus
@@ -259,10 +265,8 @@ https://www.linkedin.com/in/michael-m-881b5194
 [LinkedIn](https://www.linkedin.com/in/farha-tamanna-islam-sw-developer/)
 
 Hi, I am Farha. I have worked in embedded development for several years but now embracing a new journey in full stack SW development. For me Hackathon is an excellent platform to sharpen skills and gather new experience. In this Hackathon we have worked in a very Dynamic and well structured team. Our Project goals to help people in their emergency situation. I am very happy to be a part of this project. Hope we can help people to assure their safety.
-#### Notes
-- Tasks:
-  - Review feature suggestions and provide feedback.
-  - Contribute to UI/UX design brainstorming.
+
+
 
 [Back to Contents](#contents)
 
