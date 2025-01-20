@@ -22,8 +22,8 @@ Protect Multitool is dedicated to empowering individuals by providing innovative
   - [Loch](#loch)
   - [Mick](#mick)
   - [Mus](#mus)
-  - [Tamanna](#tamanna)
-  - [Fatima](#fatima)
+  - [Tamanna](#fahra-tamanna-islam)
+  - [Fatima](#fatima-abaji)
 - [Temp](#temp)
 
 
@@ -255,7 +255,9 @@ https://www.linkedin.com/in/michael-m-881b5194
 ![image](https://github.com/user-attachments/assets/0502af3f-0109-4dd2-88bc-cad31d74aff8)
 
 [GitHub](https://github.com/farhatamannaislam)
+
 [LinkedIn](https://www.linkedin.com/in/farha-tamanna-islam-sw-developer/)
+
 Hi, I am Farha. I have worked in embedded development for several years but now embracing a new journey in full stack SW development. For me Hackathon is an excellent platform to sharpen skills and gather new experience. In this Hackathon we have worked in a very Dynamic and well structured team. Our Project goals to help people in their emergency situation. I am very happy to be a part of this project. Hope we can help people to assure their safety.
 #### Notes
 - Tasks:
@@ -268,6 +270,7 @@ Hi, I am Farha. I have worked in embedded development for several years but now 
 ![IMG_0187](https://github.com/user-attachments/assets/8e9acab4-d739-4453-9825-0a4af5ce68a1)
 
 [GitHub](https://github.com/fatimaabaiji)
+
 [LinkedIn](https://www.linkedin.com/in/fatima-abaiji-139290192/)
 
 Participating in the hackathon has been an incredible experience. Collaborating with an amazing team allowed me to gain valuable insights into real-world software development challenges. As a junior developer, it was a fantastic opportunity to apply my skills in a practical setting, learn from more experienced teammates. The experience has greatly enhanced my understanding of teamwork, communication, and the fast-paced nature of development, making it an invaluable step in my growth as a developer.)
