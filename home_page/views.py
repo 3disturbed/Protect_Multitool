@@ -77,7 +77,6 @@ def profile_handler(request):
 def profile_create(request):
     # Check if the profile already exists
     if Profile.objects.filter(user=request.user).exists():
-        # Redirect to profile detail if the profile already exists
         return redirect('home_page:profile_handler')
 
     if request.method == 'POST':
@@ -85,7 +84,20 @@ def profile_create(request):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
+
+            # Explicitly sync the User model fields here
+            user = profile.user
+            if form.cleaned_data.get('first_name'):
+                user.first_name = form.cleaned_data.get('first_name')
+            if form.cleaned_data.get('last_name'):
+                user.last_name = form.cleaned_data.get('last_name')
+
+            # Save the User model
+            user.save()
+
+            # Save the Profile model
             profile.save()
+
             # Redirect to profile detail after creation
             return redirect('home_page:profile_handler')
     else:
@@ -93,6 +105,7 @@ def profile_create(request):
 
     # Render the profile creation form
     return render(request, 'home_page/profile_form.html', {'form': form})
+
 
 
 
