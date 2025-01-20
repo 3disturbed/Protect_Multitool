@@ -20,6 +20,7 @@ def planner(request):
     print(f"Current user: {request.user.username}")
 
     contacts = EmergencyContact.objects.filter(user=request.user)
+    emergency_contacts_check = contacts
     print(f"Number of contacts found: {contacts.count()}")
     for contact in contacts:
         print(f"Found contact: {contact.name}, {contact.phone}")
@@ -38,6 +39,7 @@ def planner(request):
     context = {
         'form': form,
         'contacts' : contacts,
+        'emergency_contacts_check': emergency_contacts_check
     }
 
     print(f"Context contacts count: {contacts.count()}")
@@ -64,7 +66,7 @@ def timer(request, id):
             print (emergency_contacts_list)
     else:
         print('No emergency contacts to display')
-
+    
     emergency_contacts_json = json.dumps(emergency_contacts_list)
 
     try:
