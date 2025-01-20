@@ -26,6 +26,7 @@ let floorOffset = 0;
 let decorations = [];
 let walls = [];
 let frameCount = 0;
+let isPaused = false;
 
 console.log('Game started');   
 const floorSprite = new Sprite({ ...FLOOR_SPRITE_CONFIG, x: 0, y: 0 });
@@ -299,9 +300,33 @@ function drawFloor(context) {
         surfaceSprite.draw(context);
     }
 }
+
+// pause and restart
+function togglePause() {
+    isPaused = !isPaused;
+}
+
+function restartGame() {
+    gameStarted = false;
+    walls = [];
+    score = 0;
+    frog.y = 50;
+    frog.velocity = 0;
+    kickCooldown = 0;
+    isPaused = false;
+    playButton.style.display = 'block';
+}
+
+const pauseButton = document.getElementById('pauseButton');
+pauseButton.addEventListener('click', togglePause);
+
+const restartButton = document.getElementById('restartButton');
+restartButton.addEventListener('click', restartGame);
+
 // Main game loop
 prewarmDecorations();
 function gameLoop(timestamp) {
+    if (!isPaused) {
     const deltaTime = 1/60;
     // Always update frog animation
     frog.update(deltaTime);
@@ -339,6 +364,7 @@ function gameLoop(timestamp) {
     frog.draw(context); // Draw frog after everything else except UI and frame
     drawFrame(context);
     drawUI(context); // UI is drawn last
+    }
     requestAnimationFrame(gameLoop);
 }
 
@@ -358,15 +384,16 @@ canvas.addEventListener('keydown', (e) => {
     }
 });
 function handleJump() {
-    if (frog.y < FLOOR_HEIGHT && kickCooldown <= 0) { // Adjusted for new floor height
-        frog.velocity = frog.jump;
-        kickCooldown = KICK_COOLDOWN;
-    }
-    if (!gameStarted) {
-        gameStarted = true;
+    if (!isPaused) {
+        if (frog.y < FLOOR_HEIGHT && kickCooldown <= 0) { // Adjusted for new floor height
+            frog.velocity = frog.jump;
+            kickCooldown = KICK_COOLDOWN;
+        }
+        if (!gameStarted) {
+            gameStarted = true;
+        }
     }
 }
-
 // Wall functions
 function spawnWall() {
     const gapPosition = Math.random() * (canvas.height - WALL_SPACE - 100) + 50;
