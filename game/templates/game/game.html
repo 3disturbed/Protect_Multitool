@@ -4,7 +4,7 @@
 {% load static %}
 
 {% if user.is_authenticated %}
-{% if contacts %}
+{% if emergency_contacts_check %}
 <canvas id="gameCanvas" width="720" height="1280"></canvas>
 <button id="playButton">Full Screen</button>
 <br>
