@@ -20,9 +20,9 @@ Protect Multitool is dedicated to empowering individuals by providing innovative
 - [Team](#team)
   - [Ben](#ben)
   - [Loch](#loch)
-  - [Mick](#mick)
+  - [Michael](#michael-mccourt)
   - [Mus](#mus)
-  - [Tamanna](#fahra-tamanna-islam)
+  - [Fahra](#fahra-tamanna-islam)
   - [Fatima](#fatima-abaji)
 - [Temp](#temp)
 
@@ -231,7 +231,7 @@ To set up the project locally, follow these steps:
 
 [Back to Contents](#contents)
 
-### Mick
+### Michael McCourt
 
 [GitHub](https://github.com/Mickjitsu)
 
