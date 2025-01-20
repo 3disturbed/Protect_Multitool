@@ -202,6 +202,8 @@ To set up the project locally, follow these steps:
 
 ## Team
 ### Ben Darlington
+![image](https://github.com/user-attachments/assets/be77086b-b6dc-469b-9d6a-4db337ea29ab)
+
 [GitHub](https://github.com/3disturbed)
 
 [LinkedIn](https://www.linkedin.com/in/darlingtonben/)
@@ -215,23 +217,19 @@ To set up the project locally, follow these steps:
 
 ### Loch
 
-- UX / UI
-- Landing Page Layout
+![image](https://github.com/user-attachments/assets/d9c7e97c-8064-4959-b786-7af5bb82b855)
 
-#### Notes
-- Create login and registration HTML templates for Django.
-- Features:
-  - User authentication.
-  - Profile management for emergency contact updates.
-  - Responsive design with HTML and CSS.
-  - Optional email confirmation.
-- File Structure:
-  - `project_multitool/templates/registration/login.html`
-  - `project_multitool/templates/registration/register.html`
+[GitHub](https://github.com/Lochy2000)
+
+[LinkedIn](https://www.linkedin.com/in/lochlann-ohiggins-developer/)
+
+Enjoy creativity in all its forms. As someone new to development, I find immense satisfaction in bringing ideas to life and seeing the final project take shape. Through this experience, I’ve come to appreciate the value of strong leadership and proactive teamwork. Also, learnt some of Githubs true strengths and weakness.
 
 [Back to Contents](#contents)
 
 ### Michael McCourt
+
+![image](https://github.com/user-attachments/assets/c659676f-d399-46b1-b631-7f055a3723e7)
 
 [GitHub](https://github.com/Mickjitsu)
 
@@ -242,12 +240,11 @@ The experience was awesome, I learnt a lot about working on a project that is ba
 -Back-end Engineer
 -MessageBird/WhatsApp wizard
 
-
-
 [Back to Contents](#contents)
 
 ### Musaddeka Ali
-![image](https://github.com/user-attachments/assets/88542df0-2032-4d25-9982-508857d50b8a)
+![image](https://github.com/user-attachments/assets/1fd6935a-5aa4-49b6-8e40-98864b60cf15)
+
 
 [Github](https://github.com/StringerMus)
 
@@ -258,7 +255,8 @@ This Hackathon marks my first experience in a collaborative coding environment. 
 [Back to Contents](#contents)
 
 ### Farha Tamanna Islam
-![image](https://github.com/user-attachments/assets/0502af3f-0109-4dd2-88bc-cad31d74aff8)
+![image](https://github.com/user-attachments/assets/44b9bece-7505-45fc-b3e5-34b99f87a913)
+
 
 [GitHub](https://github.com/farhatamannaislam)
 
@@ -271,7 +269,7 @@ Hi, I am Farha. I have worked in embedded development for several years but now 
 [Back to Contents](#contents)
 
 ### Fatima Abaji
-![IMG_0187](https://github.com/user-attachments/assets/8e9acab4-d739-4453-9825-0a4af5ce68a1)
+![image](https://github.com/user-attachments/assets/d0ce145f-1391-4526-89d8-42e93eb5df2f)
 
 [GitHub](https://github.com/fatimaabaiji)
 
