@@ -7,6 +7,6 @@ come with name, phone number and relationship with the author. User can edit or 
 
 Each user has a profile model. Profile comes with First name , last name and phone number. The user who doesn't have profile will be redirected to profile creation page.
 
-## Unresolved Bug
+## Resolved Bug
 
-Currently last name is only saved from admin panel. It is not saved from UI.
+At first last name was only saved from admin panel. It was not saved from UI. But later the issue have been fixed my modifying Django view.

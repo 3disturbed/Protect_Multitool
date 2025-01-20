@@ -33,7 +33,8 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
     'https://8000-3disturbed-protectmulti-ombljfw9dkf.ws.codeinstitute-ide.net',
     "https://multitool-87412d08ac41.herokuapp.com/",
-    'https://8000-3disturbed-protectmulti-9uxdfm3l07o.ws-eu117.gitpod.io'
+    'https://8000-3disturbed-protectmulti-9uxdfm3l07o.ws-eu117.gitpod.io',
+    'https://8000-3disturbed-protectmulti-otbbnorru0i.ws-eu117.gitpod.io',
 ]
 
 STATIC_URL = '/static/'
