@@ -5,10 +5,28 @@
 
 {% if user.is_authenticated %}
 {% if emergency_contacts_check %}
-<canvas id="gameCanvas" width="720" height="1280"></canvas>
-<button id="playButton">Full Screen</button>
-<br>
-<br>
+<div>
+    <h1 class="text-3xl font-bold mb-6 text-center bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+        Hidden Emergency Game
+    </h1>
+</div>
+<div class="max-w-2xl mx-auto backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
+    <div class="flex justify-center">
+        <canvas id="gameCanvas" width="720" height="1280" class="w-full rounded-xl border-2 border-accent mb-6"></canvas>
+    </div>
+    <div class="text-center space-x-4">
+        <button id="pauseButton" class="px-6 py-2 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
+            Pause
+        </button>
+        <button id="restartButton" class="px-6 py-2 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105">
+            Restart
+        </button>
+        <button id="playButton" class="px-6 py-2 rounded-xl bg-gradient-to-r from-accent to-secondary hover:from-accent-light hover:to-secondary-light text-white font-medium shadow-lg transform transition-all hover:scale-105 fixed bottom-6 right-6">
+            Full Screen
+        </button>
+    </div>
+</div>
+
 <script type="module" src="{% static 'game/constants.js' %}"></script>
 <script type="module" src="{% static 'game/sprite.js' %}"></script>
 <script type="module" src="{% static 'game/frog.js' %}"></script>
@@ -46,13 +64,6 @@
     const rockImg = "{% static 'game/images/rock.png' %}";
     const surfaceImg = "{% static 'game/images/surface.png' %}";
     const wallImg = "{% static 'game/images/wall.png' %}";
-
-
 </script>
-
-
-
-
-
 
 {% endblock %}
