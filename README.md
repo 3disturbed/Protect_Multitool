@@ -251,8 +251,12 @@ https://www.linkedin.com/in/michael-m-881b5194
 
 [Back to Contents](#contents)
 
-### Tamanna
+### Fahra Tamanna Islam
+![image](https://github.com/user-attachments/assets/0502af3f-0109-4dd2-88bc-cad31d74aff8)
 
+[GitHub](https://github.com/farhatamannaislam)
+[LinkedIn](https://www.linkedin.com/in/farha-tamanna-islam-sw-developer/)
+Hi, I am Farha. I have worked in embedded development for several years but now embracing a new journey in full stack SW development. For me Hackathon is an excellent platform to sharpen skills and gather new experience. In this Hackathon we have worked in a very Dynamic and well structured team. Our Project goals to help people in their emergency situation. I am very happy to be a part of this project. Hope we can help people to assure their safety.
 #### Notes
 - Tasks:
   - Review feature suggestions and provide feedback.
@@ -260,46 +264,12 @@ https://www.linkedin.com/in/michael-m-881b5194
 
 [Back to Contents](#contents)
 
-### Fatima
+### Fatima Abaji
+![IMG_0187](https://github.com/user-attachments/assets/8e9acab4-d739-4453-9825-0a4af5ce68a1)
 
-#### Notes
-- Tasks:
-  - Complete README additions.
-  - Submit the initial pull request.
-- Notes:
-  - Contact Ben or Dark for assistance if needed.
+[GitHub](https://github.com/fatimaabaiji)
+[LinkedIn](https://www.linkedin.com/in/fatima-abaiji-139290192/)
 
-[Back to Contents](#contents)
-
-
-## Temp
-This section contains temporary notes and ideas for further development.
-
-### Ideas for Safety Transit
-- Utilize Django's built-in `DateTimeField` to monitor user check-ins. Example:
-
-```python
-from datetime import timedelta
-from django.utils import timezone
-from django.db import models
-
-class CheckIn(models.Model):
-    last_check_in = models.DateTimeField()
-
-    def requires_notification(self):
-        time_passed = timezone.now() - self.last_check_in
-        return time_passed > timedelta(minutes=40)
-```
-
-[Back to Contents](#contents)
-
-## Automated WhatsApp message event
-Once triggered using a hidden feature like a game, this event will trigger an automated message to be sent via WhatsApp to the user's set emergency contacts.
-
-Emergency contacts will be set via the user's account, using PostgreSQL and Django all auth.
-
-Messaging will be sent using MessageBird API.
-
-Message will be sent via WhatsApp and be very generic as it's for testing purposes - WhatsApp requires official business proof for specific message types which we won't have at the time of creation.
+Participating in the hackathon has been an incredible experience. Collaborating with an amazing team allowed me to gain valuable insights into real-world software development challenges. As a junior developer, it was a fantastic opportunity to apply my skills in a practical setting, learn from more experienced teammates. The experience has greatly enhanced my understanding of teamwork, communication, and the fast-paced nature of development, making it an invaluable step in my growth as a developer.)
 
 [Back to Contents](#contents)
