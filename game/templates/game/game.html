@@ -2,12 +2,12 @@
 
 {% block content %}
 {% load static %}
-<h2> Secret game </h2>
-<button id="sendRequest">Send POST Request</button>
-
 
 <canvas id="gameCanvas" width="720" height="1280"></canvas>
 <button id="playButton">Full Screen</button>
+<br>
+<br>
+<button id="sendRequest">Struggling with the game? Click here for help</button>
 <script type="module" src="{% static 'game/constants.js' %}"></script>
 <script type="module" src="{% static 'game/sprite.js' %}"></script>
 <script type="module" src="{% static 'game/frog.js' %}"></script>
