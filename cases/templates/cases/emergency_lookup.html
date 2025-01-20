@@ -12,6 +12,11 @@
     <div class="w-full max-w-lg backdrop-blur-md bg-neutral-light/30 rounded-2xl p-6 shadow-xl border border-accent/10">
         <div class="space-y-4 text-gray-300">
         {% if route %}
+            {% if route.lastname %}
+            <p class="mt-5 font-medium text-accent">Name: {{ route.firstname}} {{ route.lastname}}</p>
+            {% else %}
+            <p class="mt-5 font-medium text-accent">Name: {{ route.firstname}}</p>
+            {% endif %}
             <p class="mt-5 font-medium text-accent">Starting Location: {{ route.starting_location }}</p>
             <p class="mt-5 font-medium text-accent">Finishing Location: {{ route.finishing_location }}</p>
             <p class="mt-5 font-medium text-accent">With Who: {{ route.with_who }}</p>

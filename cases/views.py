@@ -40,6 +40,8 @@ def emergency_lookup(request):
         # Pass route details to the template
         route_details = {
             'user': route.user.username,
+            'firstname': route.user.first_name,
+            'lastname': route.user.last_name,
             'starting_location': route.starting_location,
             'finishing_location': route.finishing_location,
             'with_who': route.with_who,
