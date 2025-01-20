@@ -11,6 +11,24 @@
 <script type="module" src="{% static 'game/constants.js' %}"></script>
 <script type="module" src="{% static 'game/sprite.js' %}"></script>
 <script type="module" src="{% static 'game/frog.js' %}"></script>
+<script>
+    window.gameConfig = {
+        latitude: '',
+        longitude: '',
+        emergencyContacts: JSON.parse('{{ emergency_contacts_list|safe }}'),
+        firstName: "{{ first_name }}",
+        apiUrls: {
+            coordinatesUrl: "{% url 'game:handle_event_coordinates' %}",
+            fallbackUrl: "{% url 'game:handle_event' %}",
+        },
+    };
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        window.gameConfig.latitude = position.coords.latitude;
+        window.gameConfig.longitude = position.coords.longitude;
+        console.log("Geolocation updated:", window.gameConfig.latitude, window.gameConfig.longitude);
+    });
+</script>
 <script type="module" src="{% static 'game/game.js' %}"></script>
 
 <script >
