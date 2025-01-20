@@ -21,8 +21,8 @@ Protect Multitool is dedicated to empowering individuals by providing innovative
   - [Ben](#ben)
   - [Loch](#loch)
   - [Michael](#michael-mccourt)
-  - [Mus](#mus)
-  - [Fahra](#fahra-tamanna-islam)
+  - [Mus](#musaddeka-ali)
+  - [Farha](#farha-tamanna-islam)
   - [Fatima](#fatima-abaji)
 - [Temp](#temp)
 
@@ -246,18 +246,18 @@ The experience was awesome, I learnt a lot about working on a project that is ba
 
 [Back to Contents](#contents)
 
-### Mus
+### Musaddeka Ali
+![image](https://github.com/user-attachments/assets/88542df0-2032-4d25-9982-508857d50b8a)
 
-#### Notes
-- Tasks:
-  - Complete README additions.
-  - Submit the initial pull request.
-- Notes:
-  - Contact Ben or Dark for assistance if needed.
+[Github](https://github.com/StringerMus)
+
+[LinkedIn](https://www.linkedin.com/in/musaddekali/)
+    
+This Hackathon marks my first experience in a collaborative coding environment. Starting the course with no prior background in tech or coding, I am enjoying learning programming languages and building web applications. This project has been an opportunity for me to grow both technically and collaboratively - I’ve gained hands-on experience working in a team, contributing to repositories, and embracing effective teamwork practices. I’ve learned a lot from my teammates, including advice on best practices and exploring new technologies, which have broadened my perspective and skills.
 
 [Back to Contents](#contents)
 
-### Fahra Tamanna Islam
+### Farha Tamanna Islam
 ![image](https://github.com/user-attachments/assets/0502af3f-0109-4dd2-88bc-cad31d74aff8)
 
 [GitHub](https://github.com/farhatamannaislam)
