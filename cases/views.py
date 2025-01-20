@@ -17,8 +17,8 @@ def case_home(request):
 @csrf_exempt
 def emergency_lookup(request):
     if request.method == "POST":
-        phone = request.POST.get('phone')
-        secret_key = request.POST.get('secret_key').strip()
+        phone = request.POST.get('phone', '').replace(" ", "")
+        secret_key = request.POST.get('secret_key', '').strip()
 
         # Debugging: Print inputs
         print(f"Phone: {phone}, Secret Key: {secret_key}")
