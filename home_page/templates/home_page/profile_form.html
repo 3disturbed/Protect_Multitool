@@ -75,7 +75,8 @@
                                    id="{{ form.phone_number.id_for_label }}"
                                    class="appearance-none block w-full px-4 py-3 rounded-xl bg-neutral-dark border {% if form.phone_number.errors %}border-red-500{% else %}border-accent/10{% endif %} focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent placeholder-gray-500 text-white"
                                    placeholder="Enter your phone number"
-                                   required>
+                                   required
+                                   pattern="^\+\d{1,15}$">
                             {% if form.phone_number.errors %}
                             <div class="text-red-400 text-sm mt-1">{{ form.phone_number.errors }}</div>
                             {% endif %}
