@@ -1,12 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Your Profile</h1>
-<p><strong>First Name:</strong> {{ profile.first_name|default:"Not Set" }}</p>
-<p><strong>Last Name:</strong> {{ profile.last_name|default:"Not Set" }}</p>
-<p><strong>Phone Number:</strong> {{ profile.phone_number|default:"Not Set" }}</p>
-<p>Once your profile is updated, please begin adding emergency contacts
-    <a href="{% url 'account_home:emergency_contact_list' %}"> here </a>
-</p>
+<main class="flex-grow container mx-auto px-4 pt-20 mt-10 pb-12">
+
+    <!-- Profile Section -->
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-2xl font-bold text-pink-500 text-left mb-4">Your Profile</h1>
+
+        <div>
+            <p class="text-white mb-2">
+                <strong>First Name:</strong> 
+                <span class="text-gray-400">{{ profile.first_name|default:"Not Set" }}</span>
+            </p>
+            <p class="text-white mb-2">
+                <strong>Last Name:</strong> 
+                <span class="text-gray-400">{{ profile.last_name|default:"Not Set" }}</span>
+            </p>
+            <p class="text-white mb-4">
+                <strong>Phone Number:</strong> 
+                <span class="text-gray-400">{{ profile.phone_number|default:"Not Set" }}</span>
+            </p>
+            <p class="text-gray-400">
+                Once your profile is updated, please begin adding emergency contacts 
+                <a href="{% url 'account_home:emergency_contact_list' %}" 
+                   class="text-pink-500 underline hover:text-pink-600">
+                    here
+                </a>.
+            </p>
+        </div>
+    </div>
+
+</main>
 {% endblock %}
+
 
